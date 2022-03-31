@@ -60,20 +60,18 @@ node.default["redborder"]["sensors_info_all"] = get_sensors_all_info()
 #get namespaces
 node.default["redborder"]["namespaces"] = get_namespaces
 
-#get string with all zookeeper hosts and port separated by commas, its needed for multiples services
-zk_port = node["redborder"]["zookeeper"]["port"]
-#zk_hosts = ["localhost"].map {|z| "#{z}.node:#{zk_port}"}.join(',')
-node.default["redborder"]["zookeeper"]["zk_hosts"] = "zookeeper.service:#{node["redborder"]["zookeeper"]["port"]}"
-
 #memory
 #getting total system memory less 10% reserved by system
 sysmem_total = (node["memory"]["total"].to_i * 0.90).to_i
 #node attributes related with memory are changed inside the function to have simplicity using recursivity
 memory_services(sysmem_total)
 
+ip_regex = /^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$/
+resolv_dns_dg = Chef::DataBagItem.load("rBglobal", "resolv_dns")   rescue resolv_dns_dg={}
+monitors_dg   = Chef::DataBagItem.load("rBglobal", "monitors")     rescue monitors_dg={}
+domain_db     = Chef::DataBagItem.load("rBglobal", "publicdomain") rescue domain_db={}
 
-
-
+sensor_id = node["redborder"]["sensor_id"].to_i rescue 0
 
 
 

@@ -1,0 +1,63 @@
+<%####################################################################### %>
+<%# Copyright (c) 2014 ENEO Tecnología S.L. %>
+<%# This file is part of redBorder. %>
+<%# redBorder is free software: you can redistribute it and/or modify %>
+<%# it under the terms of the GNU Affero General Public License License as published by %>
+<%# the Free Software Foundation, either version 3 of the License, or %>
+<%# (at your option) any later version. %>
+<%# redBorder is distributed in the hope that it will be useful, %>
+<%# but WITHOUT ANY WARRANTY; without even the implied warranty of %>
+<%# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the %>
+<%# GNU Affero General Public License License for more details. %>
+<%# You should have received a copy of the GNU Affero General Public License License %>
+<%# along with redBorder. If not, see <http://www.gnu.org/licenses/>. %>
+<%####################################################################### %>
+:statFile: 
+:instancesGroup:
+<% node["redborder"]["snort"]["groups"].each do |id, original_group| %>
+<% if !original_group["cpu_list"].nil? and original_group["cpu_list"].size>0 %>
+<% group_name = (original_group["name"].nil? ? "none" : original_group["name"].to_s.gsub(' ','')) %>
+    -
+        :group: <%= id %>
+        :name: <%= group_name %>
+        :instances:
+<% original_group["cpu_list"].each_with_index do |v, index| %>
+            - <%= index %>
+<% end %>
+        :interfaces: <%=
+  counter=0
+  if !original_group.nil? and !original_group["segments"].nil? 
+    original_group["segments"].each do |x|
+      counter+=node["redborder"]["segments"][x]["interfaces"].keys.count if !node["redborder"]["segments"][x].nil?
+    end
+  end
+  counter
+%>
+<% end %>
+<% end %>
+<% if node["redborder"]["dmidecode"] and node["redborder"]["dmidecode"]["manufacturer"] == "Supermicro" %>
+:tempSensors:
+    -
+        :name: 'System Temp'
+        :script: "/usr/lib/redborder/bin/rb_get_sensor.sh -t Temperature -s 'System Temp'"
+    -
+        :name: 'Peripheral Temp'
+        :script: "/usr/lib/redborder/bin/rb_get_sensor.sh -t Temperature -s 'Peripheral[ Temp]*'"
+    -
+        :name: 'PCH Temp'
+        :script: "/usr/lib/redborder/bin/rb_get_sensor.sh -t Temperature -s 'PCH Temp'"
+
+:fanSensors:
+    -
+        :name: 'FAN1'
+        :script: "/usr/lib/redborder/bin/rb_get_sensor.sh -t Fan -s 'FAN[ ]*1'"
+    -
+        :name: 'FAN2'
+        :script: "/usr/lib/redborder/bin/rb_get_sensor.sh -t Fan -s 'FAN[ ]*2'"
+    -
+        :name: 'FAN3'
+        :script: "/usr/lib/redborder/bin/rb_get_sensor.sh -t Fan -s 'FAN[ ]*3'"
+<% end %>
+
+:versionPlatform: 3
+:statTimestampInterval: 25

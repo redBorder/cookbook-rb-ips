@@ -1,0 +1,18 @@
+<%####################################################################### %>
+<%# Copyright (c) 2014 ENEO Tecnología S.L. %>
+<%# This file is part of redBorder. %>
+<%# redBorder is free software: you can redistribute it and/or modify %>
+<%# it under the terms of the GNU Affero General Public License License as published by %>
+<%# the Free Software Foundation, either version 3 of the License, or %>
+<%# (at your option) any later version. %>
+<%# redBorder is distributed in the hope that it will be useful, %>
+<%# but WITHOUT ANY WARRANTY; without even the implied warranty of %>
+<%# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the %>
+<%# GNU Affero General Public License License for more details. %>
+<%# You should have received a copy of the GNU Affero General Public License License %>
+<%# along with redBorder. If not, see <http://www.gnu.org/licenses/>. %>
+<%####################################################################### %>
+Defaults:redBorder !requiretty
+Defaults:rb-monitor !requiretty, !syslog 
+redBorder      ALL= NOPASSWD:SETENV: /bin/env BOOTUP=none /usr/lib/redborder/bin/rb_get_sensor_rules.sh *, /usr/lib/redborder/bin/rb_bypass.sh, /usr/lib/redborder/bin/rb_wakeup_chef, /usr/lib/redborder/bin/rb_disassociate_sensor.sh -f, /usr/lib/redborder/bin/rb_update_geoip, /sbin/service chef-client restart, /usr/lib/redborder/bin/rb_u2pcap.sh, /usr/lib/redborder/bin/rb_update_redborder_rpms.sh -f
+rb-monitor     ALL= NOPASSWD: /usr/lib/redborder/bin/rb_get_perfmonitor_stats.sh, /usr/lib/redborder/bin/rb_get_sensor.sh, /usr/lib/redborder/bin/rb_get_pfring_stats.sh, /bin/nice -n 19 /usr/sbin/fping -p 1 -c 10 kafka.<%= node["redborder"]["cdomain"] %>
