@@ -89,10 +89,7 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
     #     name node["hostname"]
     #     monitors monitors_dg["monitors"]
     #     action ((ips_services["redborder-monitor"] and sensor_id > 0) ? :add : :remove)
-    # end
-     
-
-    
+    # end   
       
       template "/usr/lib/redborder/bin/rb_get_sensor_rules.rb" do
         source "rb_get_sensor_rules.rb.erb"
