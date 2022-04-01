@@ -12,6 +12,13 @@
 # ips services
 ips_services = ips_services()
 
+ip_regex = /^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$/
+resolv_dns_dg = Chef::DataBagItem.load("rBglobal", "resolv_dns")   rescue resolv_dns_dg={}
+monitors_dg   = Chef::DataBagItem.load("rBglobal", "monitors")     rescue monitors_dg={}
+domain_db     = Chef::DataBagItem.load("rBglobal", "publicdomain") rescue domain_db={}
+
+sensor_id = node["redborder"]["sensor_id"].to_i rescue 0
+
 geoip_config "Configure GeoIP" do
     action (ips_services["geoip"] ? :add : :remove)
 end
