@@ -38,11 +38,7 @@ end
 #     action (ips_services["rsyslog"] ? [:add] : [:remove])
 # end
 
-puts "Checking if chef_enable is there.."
-
 if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
-    puts "chef_enable is true!"
-    sleep 20
     snort_config "Configure Snort" do
         sensor_id sensor_id
         action ((ips_services["snort"] and !node["redborder"]["snort"]["groups"].empty? and sensor_id>0 and node["redborder"]["segments"] and node["cpu"] and node["cpu"]["total"] ) ? :add : :remove)
@@ -96,9 +92,6 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
           end # if File.exists..
         end # [..].each do
       end # if sensor.id>0
-else
-  puts "chef_enable is false or not there!"
-  sleep 20
 end # if node
 
     # rbmonitor_config "Configure redborder-monitor" do
