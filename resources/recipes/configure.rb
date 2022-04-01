@@ -116,9 +116,9 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
         mode 0755
         retries 2
         variables(:monitors => monitors_dg["monitors"])
-        notifies :stop, "service[snmptrapd]", :delayed
-        notifies :restart, "service[snmpd]", :delayed
-        notifies :start, "service[snmptrapd]", :delayed
+        ###notifies :stop, "service[snmptrapd]", :delayed
+        ###notifies :restart, "service[snmpd]", :delayed
+        ###notifies :start, "service[snmptrapd]", :delayed
       end
       
       template "/etc/watchdog.conf" do
@@ -127,7 +127,7 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
         group "root"
         mode 0644
         retries 2
-        notifies :restart, "service[watchdog]"
+        ###notifies :restart, "service[watchdog]"
       end
       
       template "/etc/watchdog.d/020-check-snort.sh" do
@@ -136,7 +136,7 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
         group "root"
         mode 0755
         retries 2
-        notifies :reload, "service[watchdog]", :delayed 
+        ###notifies :reload, "service[watchdog]", :delayed 
       end
 end
 
