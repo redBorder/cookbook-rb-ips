@@ -13,6 +13,19 @@ default["redborder"]["locations"] = [
 
 default["redborder"]["ips"]["insecure"] = true
 
+# common
+default[:redborder][:watchdog][:service]         = "watchdog"
+default[:redborder][:smtp][:service]             = "postfix"
+default[:redborder][:network]                    = {}
+default[:redborder][:network][:configure_routes] = false
+default[:redborder][:network][:routes]           = {}
+default[:redborder][:chef_enabled]               = true
+default[:redborder]["proxy"]                    = {}
+default[:redborder]["license"] = {}
+default[:redborder]["license"]["presence"] = false
+default[:redborder]["sshd"]                     = {}
+default[:redborder]["sshd"]["addkeys"]          = true
+
 #chef-client
 default["chef-client"]["interval"] = 300
 default["redborder"]["chef_client_interval"] = 300

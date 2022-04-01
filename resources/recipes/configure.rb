@@ -13,8 +13,8 @@
 ips_services = ips_services()
 
 ip_regex = /^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$/
-resolv_dns_dg = Chef::DataBagItem.load("rBglobal", "resolv_dns")   rescue resolv_dns_dg={}
-monitors_dg   = Chef::DataBagItem.load("rBglobal", "monitors")     rescue monitors_dg={}
+###resolv_dns_dg = Chef::DataBagItem.load("rBglobal", "resolv_dns")   rescue resolv_dns_dg={}
+###monitors_dg   = Chef::DataBagItem.load("rBglobal", "monitors")     rescue monitors_dg={}
 domain_db     = Chef::DataBagItem.load("rBglobal", "publicdomain") rescue domain_db={}
 
 sensor_id = node["redborder"]["sensor_id"].to_i rescue 0
@@ -38,7 +38,11 @@ end
 #     action (ips_services["rsyslog"] ? [:add] : [:remove])
 # end
 
+puts "Checking if chef_enable is there.."
+
 if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
+    puts "chef_enable is true!"
+    sleep 20
     snort_config "Configure Snort" do
         sensor_id sensor_id
         action ((ips_services["snort"] and !node["redborder"]["snort"]["groups"].empty? and sensor_id>0 and node["redborder"]["segments"] and node["cpu"] and node["cpu"]["total"] ) ? :add : :remove)
@@ -53,9 +57,9 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
               command "/usr/lib/redborder/bin/rb_bypass.sh -b #{s} -s on" 
               ignore_failure true
               action :run
-            end
-          end
-        end
+            end # execute
+          end # if !unsed
+        end #do
       
         #Delete unnecesary files:
         [
@@ -71,26 +75,31 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
                 directory f do 
                   recursive true
                   action :delete
-                end
+                end #do
               else
                 file f do 
                   action :delete
-                end
-              end      
-            end
-          end
-        end
+                end #do
+              end #if File..      
+            end # if match
+          end #Dir.. do
+        end # [..].each do
       
         # Clean rubish for snort and barnyard instances should not be running
         [ "snortd" , "barnyard2" ].each do |s|
-          execute "cleanstop_#{s}" do
-            command "/etc/init.d/#{s} cleanstop" 
-            ignore_failure true
-            action :run
-          end
-        end
-      end
-    end
+          if File.exists?("/etc/init.d/#{s}") 
+            execute "cleanstop_#{s}" do
+              command "/etc/init.d/#{s} cleanstop" 
+              ignore_failure true
+              action :run
+            end # execute
+          end # if File.exists..
+        end # [..].each do
+      end # if sensor.id>0
+else
+  puts "chef_enable is false or not there!"
+  sleep 20
+end # if node
 
     # rbmonitor_config "Configure redborder-monitor" do
     #     name node["hostname"]
@@ -115,18 +124,18 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
         mode 0755
       end
       
-      template "/etc/rb_snmp_pass.yml" do
-        source "rb_snmp_pass.yml.erb"
-        cookbook "rb-ips"
-        owner "root"
-        group "root"
-        mode 0755
-        retries 2
-        variables(:monitors => monitors_dg["monitors"])
-        ###notifies :stop, "service[snmptrapd]", :delayed
-        ###notifies :restart, "service[snmpd]", :delayed
-        ###notifies :start, "service[snmptrapd]", :delayed
-      end
+      ###template "/etc/rb_snmp_pass.yml" do
+      ###  source "rb_snmp_pass.yml.erb"
+      ###  cookbook "rb-ips"
+      ###  owner "root"
+      ###  group "root"
+      ###  mode 0755
+      ###  retries 2
+      ###  variables(:monitors => monitors_dg["monitors"])
+      ###  ###notifies :stop, "service[snmptrapd]", :delayed
+      ###  ###notifies :restart, "service[snmpd]", :delayed
+      ###  ###notifies :start, "service[snmptrapd]", :delayed
+      ###end
       
       template "/etc/watchdog.conf" do
         source "watchdog.conf.erb"
@@ -137,15 +146,14 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
         ###notifies :restart, "service[watchdog]"
       end
       
-      template "/etc/watchdog.d/020-check-snort.sh" do
-        source "watchdog_020-check-snort.sh.erb"
-        owner "root"
-        group "root"
-        mode 0755
-        retries 2
-        ###notifies :reload, "service[watchdog]", :delayed 
-      end
-end
+      ###template "/etc/watchdog.d/020-check-snort.sh" do
+      ###  source "watchdog_020-check-snort.sh.erb"
+      ###  owner "root"
+      ###  group "root"
+      ###  mode 0755
+      ###  retries 2
+      ###  ###notifies :reload, "service[watchdog]", :delayed 
+      ###end
 
 if !node["redborder"]["ipsrules"].nil? and !node["redborder"]["cloud"].nil? 
     node["redborder"]["ipsrules"].to_hash.each do |groupid, ipsrules| 
