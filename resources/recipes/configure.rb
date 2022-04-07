@@ -19,6 +19,16 @@ domain_db     = Chef::DataBagItem.load("rBglobal", "publicdomain") rescue domain
 
 sensor_id = node["redborder"]["sensor_id"].to_i rescue 0
 
+if sensor_id>0
+  if node.name.start_with?"rbipscp-"
+    node.run_list(["role[ipscp-sensor]", "role[rBsensor-#{sensor_id}]", "role[ipscp-sensor]"])
+  elsif node.name.start_with?"rbipsv2-"
+    node.run_list(["role[ipsv2-sensor]", "role[rBsensor-#{sensor_id}]", "role[ipsv2-sensor]"])
+  else
+    node.run_list(["role[ips-sensor]", "role[rBsensor-#{sensor_id}]", "role[ips-sensor]"])
+  end
+end
+
 geoip_config "Configure GeoIP" do
     action (ips_services["geoip"] ? :add : :remove)
 end
@@ -58,6 +68,7 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
         end #do
       
         #Delete unnecesary files:
+        groups = node["redborder"]["snort"]["groups"].keys.map{|x| x.to_i}
         [
           {:files => "/etc/sysconfig/snort-*", :regex => /\/snort-(\d+)$/}, 
           {:files => "/etc/sysconfig/barnyard2-*", :regex => /\/barnyard2-(\d+)$/}, 
