@@ -110,24 +110,7 @@ end # if node
     #     monitors monitors_dg["monitors"]
     #     action ((ips_services["redborder-monitor"] and sensor_id > 0) ? :add : :remove)
     # end   
-      
-      template "/usr/lib/redborder/bin/rb_get_sensor_rules.rb" do
-        source "rb_get_sensor_rules.rb.erb"
-        cookbook "rb-ips"
-        owner "root"
-        group "root"
-        mode 0755
-        retries 2
-      end
-      
-      template "/usr/lib/redborder/bin/rb_snmp_pass.rb" do
-        source "rb_snmp_pass.rb.erb"
-        cookbook "rb-ips"
-        owner "root"
-        group "root"
-        mode 0755
-      end
-      
+           
       ###template "/etc/rb_snmp_pass.yml" do
       ###  source "rb_snmp_pass.yml.erb"
       ###  cookbook "rb-ips"
