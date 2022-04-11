@@ -54,6 +54,11 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
         action ((ips_services["snort"] and !node["redborder"]["snort"]["groups"].empty? and sensor_id>0 and node["redborder"]["segments"] and node["cpu"] and node["cpu"]["total"] ) ? :add : :remove)
     end
 
+    barnyard2_config "Configure Barnyard2" do
+      sensor_id sensor_id
+      action ((ips_services["barnyard2"] and !node["redborder"]["snort"]["groups"].empty? and sensor_id>0 and node["redborder"]["segments"] and node["cpu"] and node["cpu"]["total"] ) ? :add : :remove)
+    end
+    
     if sensor_id>0 and node["redborder"] and node["redborder"]["segments"]
         #Activate bypass on unused segments
         node["redborder"]["segments"].keys.each do |s|
