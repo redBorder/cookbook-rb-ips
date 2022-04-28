@@ -9,6 +9,8 @@
 
 # Services configuration
 
+extend Rb_ips::Helpers
+
 # ips services
 ips_services = ips_services()
 
@@ -49,7 +51,7 @@ end
 # end
 
 if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
-    groups_in_use = get_groups_info
+    groups_in_use = get_groups_in_use_info
 
     snort_config "Configure Snort" do
         sensor_id sensor_id
