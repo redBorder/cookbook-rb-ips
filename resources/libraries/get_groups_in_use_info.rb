@@ -19,7 +19,7 @@ module Rb_ips
           group["segments"] = group["segments"].select{ |x| !used_segments.include?(x) }
          
           # Skip non used groups
-          next unless group["cpu_list"].size==0 or group["segments"].size==0 or group["bindings"].nil? or group["bindings"].size==0
+          next if group["cpu_list"].size==0 or group["segments"].size==0 or group["bindings"].nil? or group["bindings"].size==0
           
           used_segments = used_segments + group["segments"]
 
