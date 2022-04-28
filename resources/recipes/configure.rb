@@ -49,13 +49,17 @@ end
 # end
 
 if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
+    groups_in_use = get_groups_info
+
     snort_config "Configure Snort" do
         sensor_id sensor_id
+        groups groups_in_use
         action ((ips_services["snort"] and !node["redborder"]["snort"]["groups"].empty? and sensor_id>0 and node["redborder"]["segments"] and node["cpu"] and node["cpu"]["total"] ) ? :add : :remove)
     end
 
     barnyard2_config "Configure Barnyard2" do
       sensor_id sensor_id
+      groups groups_in_use
       action ((ips_services["barnyard2"] and !node["redborder"]["snort"]["groups"].empty? and sensor_id>0 and node["redborder"]["segments"] and node["cpu"] and node["cpu"]["total"] ) ? :add : :remove)
     end
     
@@ -63,7 +67,8 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
         #Activate bypass on unused segments
         node["redborder"]["segments"].keys.each do |s|
           next unless s =~ /^bpbr[\d]+$/
-          if !used_segments.include?(s)
+          # Switch on bypass on those segments that are not in use
+          if groups_in_use.select{|g| g["segments"].include?s}.empty?
             execute "bypass_#{s}" do
               command "/usr/lib/redborder/bin/rb_bypass.sh -b #{s} -s on" 
               ignore_failure true
