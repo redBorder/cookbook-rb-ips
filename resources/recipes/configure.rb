@@ -389,7 +389,7 @@ end
 service "watchdog" do
     service_name node[:redborder][:watchdog][:service]
     ignore_failure true
-    supports :status => true, :reload => true, :restart => true
+    supports :status => true, :restart => true
     action([:start, :enable])
 end
 
