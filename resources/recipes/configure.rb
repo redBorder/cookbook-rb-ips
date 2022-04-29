@@ -334,7 +334,7 @@ end # if node
     group "root"
     mode 0755
     retries 2
-    notifies :reload, "service[watchdog]", :delayed 
+    notifies :restart, "service[watchdog]", :delayed 
   end
 
   # [ "/etc/init.d/snortd", "/etc/init.d/barnyard2", "/etc/init.d/bp_watchdog", "/etc/snort", "/etc/pf_ring", "/etc/kdump.conf", "/etc/rb-monitor", "/etc/init.d/rb-monitor", "/etc/rdi", "/etc/watchdog.d" ].each do |l|
