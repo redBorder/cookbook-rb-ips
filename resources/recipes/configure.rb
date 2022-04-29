@@ -379,6 +379,11 @@ end
 #   sensor_id>0 ? action([:start, :enable]) : action([:stop, :disable])
 # end
 
+yum_package "bp_watchdog" do
+  action :upgrade
+  flush_cache [:before]
+end
+
 service "bp_watchdog" do
     service_name "bp_watchdog"
     ignore_failure true
