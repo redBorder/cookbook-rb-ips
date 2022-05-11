@@ -234,7 +234,7 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
     snort_config "Configure Snort" do
         sensor_id sensor_id
         groups groups_in_use
-        action ((ips_services["snort"] and !node["redborder"]["snort"]["groups"].empty? and sensor_id>0 and node["redborder"]["segments"] and node["cpu"] and node["cpu"]["total"] ) ? :add : :remove)
+        action ((ips_services["snortd"] and !node["redborder"]["snort"]["groups"].empty? and sensor_id>0 and node["redborder"]["segments"] and node["cpu"] and node["cpu"]["total"] ) ? :add : :remove)
     end
 
     barnyard2_config "Configure Barnyard2" do
