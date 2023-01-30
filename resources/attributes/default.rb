@@ -64,7 +64,7 @@ default["redborder"]["services"]["redborder-monitor"]         = true
 default["redborder"]["services"]["snmp"]                      = true
 default["redborder"]["services"]["ntp"]                       = true
 default["redborder"]["services"]["rsyslog"]                   = true
-default["redborder"]["services"]["snort"]                     = true
+default["redborder"]["services"]["snortd"]                    = true
 default["redborder"]["services"]["barnyard2"]                 = true
 
 default["redborder"]["systemdservices"]["chef-client"]            = ["chef-client"]
