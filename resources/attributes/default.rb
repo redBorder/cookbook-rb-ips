@@ -58,7 +58,6 @@ default["redborder"]["memory_services"]["barnyard2"] = {"count" => 10, "memory" 
 
 default["redborder"]["services"] = {}
 default["redborder"]["services"]["chef-client"]               = true
-default["redborder"]["services"]["rb-monitor"]                = true
 default["redborder"]["services"]["geoip"]                     = true
 default["redborder"]["services"]["redborder-monitor"]         = true
 default["redborder"]["services"]["snmp"]                      = true
@@ -74,5 +73,5 @@ default["redborder"]["systemdservices"]["snmp"]                   = ["snmpd"]
 default["redborder"]["systemdservices"]["ntp"]                    = ["ntpd"]
 default["redborder"]["systemdservices"]["rsyslog"]                = ["rsyslog"]
 default["redborder"]["systemdservices"]["snortd"]                 = ["snortd"]
-default["redborder"]["systemdservices"]["barnyard2"]               = ["barnyard2"]
+default["redborder"]["systemdservices"]["barnyard2"]              = ["barnyard2"]
 

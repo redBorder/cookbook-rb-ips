@@ -12,7 +12,7 @@
 <%# You should have received a copy of the GNU Affero General Public License License %>
 <%# along with redBorder. If not, see <http://www.gnu.org/licenses/>. %>
 <%####################################################################### %>
-Defaults:redBorder !requiretty
-Defaults:rb-monitor !requiretty, !syslog 
-redBorder      ALL= NOPASSWD:SETENV: /bin/env BOOTUP=none /usr/lib/redborder/bin/rb_get_sensor_rules.sh *, /usr/lib/redborder/bin/rb_bypass.sh, /usr/lib/redborder/bin/rb_wakeup_chef, /usr/lib/redborder/bin/rb_disassociate_sensor.sh -f, /usr/lib/redborder/bin/rb_update_geoip, /sbin/service chef-client restart, /usr/lib/redborder/bin/rb_u2pcap.sh, /usr/lib/redborder/bin/rb_update_redborder_rpms.sh -f
-rb-monitor     ALL= NOPASSWD: /usr/lib/redborder/bin/rb_get_perfmonitor_stats.sh, /usr/lib/redborder/bin/rb_get_sensor.sh, /usr/lib/redborder/bin/rb_get_pfring_stats.sh, /bin/nice -n 19 /usr/sbin/fping -p 1 -c 10 kafka.<%= node["redborder"]["cdomain"] %>
+Defaults:redborder !requiretty
+Defaults:redborder-monitor !requiretty, !syslog 
+redborder      ALL= NOPASSWD:SETENV: /bin/env BOOTUP=none /usr/lib/redborder/bin/rb_get_sensor_rules.sh *, /usr/lib/redborder/bin/rb_bypass.sh, /usr/lib/redborder/bin/rb_wakeup_chef, /usr/lib/redborder/bin/rb_disassociate_sensor.sh -f, /usr/lib/redborder/bin/rb_update_geoip, /sbin/service chef-client restart, /usr/lib/redborder/bin/rb_u2pcap.sh, /usr/lib/redborder/bin/rb_update_redborder_rpms.sh -f
+redborder-monitor     ALL= NOPASSWD: /usr/lib/redborder/bin/rb_get_perfmonitor_stats.sh, /usr/lib/redborder/bin/rb_get_sensor.sh, /usr/lib/redborder/bin/rb_get_pfring_stats.sh, /bin/nice -n 19 /usr/sbin/fping -p 1 -c 10 kafka.service

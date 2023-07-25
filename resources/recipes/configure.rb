@@ -16,7 +16,7 @@ ips_services = ips_services()
 
 ip_regex = /^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$/
 ###resolv_dns_dg = Chef::DataBagItem.load("rBglobal", "resolv_dns")   rescue resolv_dns_dg={}
-###monitors_dg   = Chef::DataBagItem.load("rBglobal", "monitors")     rescue monitors_dg={}
+monitors_dg   = Chef::DataBagItem.load("rBglobal", "monitors")     rescue monitors_dg={}
 domain_db     = Chef::DataBagItem.load("rBglobal", "publicdomain") rescue domain_db={}
 
 # if domain_db["name"].nil? or domain_db["name"]==""
@@ -295,11 +295,11 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
       end # if sensor.id>0
 end # if node
 
-# rbmonitor_config "Configure redborder-monitor" do
-#     name node["hostname"]
-#     monitors monitors_dg["monitors"]
-#     action ((ips_services["redborder-monitor"] and sensor_id > 0) ? :add : :remove)
-# end   
+ rbmonitor_config "Configure redborder-monitor" do
+     name node["rbname"]
+     sensor_id sensor_id
+     action ((ips_services["redborder-monitor"] and sensor_id > 0) ? :add : :remove)
+ end   
         
   ###template "/etc/rb_snmp_pass.yml" do
   ###  source "rb_snmp_pass.yml.erb"
