@@ -297,7 +297,7 @@ end # if node
 
  rbmonitor_config "Configure redborder-monitor" do
      name node["rbname"]
-     sensor_id sensor_id
+     hostip node["ipaddress"]
      action ((ips_services["redborder-monitor"] and sensor_id > 0) ? :add : :remove)
  end   
         
