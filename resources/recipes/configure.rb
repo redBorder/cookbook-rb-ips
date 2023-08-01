@@ -158,8 +158,8 @@ template "/etc/chef/role-sensor-once.json" do
   variables(:sensor_id => sensor_id)
 end
 
-template "/etc/sudoers.d/redBorder" do
-  source "redBorder.erb"
+template "/etc/sudoers.d/redborder-ips" do
+  source "redborder-ips.erb"
   cookbook "rb-ips"
   owner "root"
   group "root"
