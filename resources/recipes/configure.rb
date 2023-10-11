@@ -219,10 +219,7 @@ snmp_config "Configure snmp" do
     action (ips_services["snmp"] ? :add : :remove)
 end
   
-ntp_config "Configure NTP" do
-    action (ips_services["ntp"] ? :add : :remove)
-end
-  
+ 
 # rsyslog_config "Configure rsyslog" do
 #     vault_nodes node["redborder"]["sensors_info_all"]["vault-sensor"]
 #     action (ips_services["rsyslog"] ? [:add] : [:remove])
