@@ -20,9 +20,9 @@ ip_regex = /^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]
 domain_db     = Chef::DataBagItem.load("rBglobal", "publicdomain") rescue domain_db={}
 
 # if domain_db["name"].nil? or domain_db["name"]==""
-#   node.set["redBorder"]["cdomain"] = "redborder.cluster"
+#   node.default["redBorder"]["cdomain"] = "redborder.cluster"
 # else
-#   node.set["redBorder"]["cdomain"] = domain_db["name"]
+#   node.default["redBorder"]["cdomain"] = domain_db["name"]
 # end
 
 sensor_id = node["redborder"]["sensor_id"].to_i rescue 0
@@ -43,7 +43,7 @@ sensor_id = node["redborder"]["sensor_id"].to_i rescue 0
 
 # managers      = managers.sort{|a,b| (a["rb_time"]||999999999999999999999) <=> (b["rb_time"]||999999999999999999999)}
 
-node.set["redborder"]["chef_client_interval"] = 300
+node.default["redborder"]["chef_client_interval"] = 300
 
 directory "/etc/snortpcaps" do 
   owner "root" 
@@ -353,7 +353,7 @@ if !node["redborder"]["ipsrules"].nil? and !node["redborder"]["cloud"].nil?
           end
           ruby_block "update_rule_timestamp_#{groupid}" do
             block do
-              node.set["redborder"]["ipsrules"][groupid]["timestamp_last"] = node["redborder"]["ipsrules"][groupid]["timestamp"]
+              node.default["redborder"]["ipsrules"][groupid]["timestamp_last"] = node["redborder"]["ipsrules"][groupid]["timestamp"]
             end
             action :nothing
           end
@@ -425,7 +425,7 @@ end
 #     variables(:joined => sensor_id>0 )
 #   end
 # else
-#   node.set["redBorder"]["force-run-once"]=false
+#   node.default["redBorder"]["force-run-once"]=false
 # end
 
 # if File.exists?("/etc/yum.repos.d/redBorder.repo")
