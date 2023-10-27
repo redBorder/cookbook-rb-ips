@@ -9,7 +9,7 @@ depends 'zookeeper', '0.0.1'
 
 ### Platforms
 
-- Centos 7
+- Rocky Linux 9
 
 ### Chef
 
