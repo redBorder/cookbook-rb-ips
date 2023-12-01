@@ -43,6 +43,14 @@ sensor_id = node["redborder"]["sensor_id"].to_i rescue 0
 
 # managers      = managers.sort{|a,b| (a["rb_time"]||999999999999999999999) <=> (b["rb_time"]||999999999999999999999)}
 
+rb_selinux_config "Configure Selinux" do
+  if shell_out("getenforce").stdout.chomp == "Disabled"
+    action :remove
+  else
+    action :add
+  end
+end
+
 node.normal["redborder"]["chef_client_interval"] = 300
 
 directory "/etc/snortpcaps" do 
