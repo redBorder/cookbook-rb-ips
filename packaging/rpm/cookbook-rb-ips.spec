@@ -45,5 +45,7 @@ esac
 %doc
 
 %changelog
+* Fri Dec 01 2023 David Vanhoucke <dvanhoucke@redborder.com> - 0.1.3
+- Add selinux
 * Tue Mar 22 2022 Miguel Negron <manegron@redborder.com> - 0.0.1
 - Initial release of ips
