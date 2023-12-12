@@ -8,7 +8,7 @@
 #
 
 template "/etc/systemd/journald.conf" do
-    source "journald.conf.erb"
+    source "systemd-journald_journald.conf.erb"
     owner "root"
     group "root"
     mode 0440
