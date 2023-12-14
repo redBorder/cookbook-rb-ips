@@ -45,6 +45,8 @@ esac
 %doc
 
 %changelog
+* Thu Dec 14 2023 Miguel Álvarez <malvarez@redborder.com> - 0.1.4
+- Add cgroups
 * Fri Dec 01 2023 David Vanhoucke <dvanhoucke@redborder.com> - 0.1.3
 - Add selinux
 * Tue Mar 22 2022 Miguel Negron <manegron@redborder.com> - 0.0.1
