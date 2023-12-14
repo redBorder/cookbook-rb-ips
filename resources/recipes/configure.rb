@@ -417,6 +417,10 @@ service "sshd" do
     action [:start, :enable]
 end
 
+rbcgroup_config "Configure cgroups" do
+  action :add 
+end
+
 execute "force_chef_client_wakeup" do
     command "/usr/lib/redborder/bin/rb_wakeup_chef"
     ignore_failure true
