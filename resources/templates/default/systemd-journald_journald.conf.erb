@@ -17,33 +17,19 @@
 # See journald.conf(5) for details.
 
 [Journal]
-Storage=volatile
-#Compress=yes
-#Seal=yes
-#SplitMode=uid
-#SyncIntervalSec=5m
-RateLimitIntervalSec=1s
-RateLimitBurst=300
-SystemMaxUse=100M
-SystemKeepFree=100M
+# Maximum persistent storage used by the journal.
+SystemMaxUse=500M
+
+# Amount of free space a journal leaves when adding entries to persistent storage.
+SystemKeepFree=1G
+
+# Sets the maximum size for journal files in persistent storage.
 SystemMaxFileSize=50M
-#SystemMaxFiles=100
-RuntimeMaxUse=50M
-#RuntimeKeepFree=
-#RuntimeMaxFileSize=
-#RuntimeMaxFiles=100
-#MaxRetentionSec=
-#MaxFileSec=1month
-#ForwardToSyslog=no
-#ForwardToKMsg=no
-#ForwardToConsole=no
-#ForwardToWall=yes
-#TTYPath=/dev/console
-#MaxLevelStore=debug
-#MaxLevelSyslog=debug
-#MaxLevelKMsg=notice
-#MaxLevelConsole=info
-#MaxLevelWall=emerg
-#LineMax=48K
-#ReadKMsg=yes
-Audit=
+
+
+# Configures the rate limiting that is applied to all messages generated on the system. 
+# If, in the time interval defined by RateLimitIntervalSec=, more messages than specified 
+# in RateLimitBurst= are logged by a service, all further messages within the interval are 
+# dropped until the interval is over. 
+RateLimitIntervalSec=30s
+RateLimitBurst=3000
