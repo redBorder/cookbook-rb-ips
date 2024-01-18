@@ -2,7 +2,7 @@
 # Cookbook Name:: ips
 # Recipe:: configure
 #
-# Copyright 2022, redborder
+# Copyright 2024, redborder
 #
 # AFFERO GENERAL PUBLIC LICENSE V3
 #

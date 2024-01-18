@@ -1,3 +1,12 @@
+#
+# Cookbook Name:: ips
+# Recipe:: configure_cron_tasks
+#
+# Copyright 2024, redborder
+#
+# AFFERO GENERAL PUBLIC LICENSE V3
+#
+
 cron_d 'create_clean_logs_daily' do
   action :create
   minute '00'
