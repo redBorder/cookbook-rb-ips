@@ -300,11 +300,10 @@ if node["redborder"]["chef_enabled"].nil? or node["redborder"]["chef_enabled"]
       end # if sensor.id>0
 end # if node
 
-# rbmonitor_config "Configure redborder-monitor" do
-#     name node["hostname"]
-#     monitors monitors_dg["monitors"]
-#     action ((ips_services["redborder-monitor"] and sensor_id > 0) ? :add : :remove)
-# end   
+  rbmonitor_config "Configure redborder-monitor" do
+      name node["hostname"]
+      action ((ips_services["redborder-monitor"] and sensor_id > 0) ? :add : :remove)
+  end   
         
   ###template "/etc/rb_snmp_pass.yml" do
   ###  source "rb_snmp_pass.yml.erb"
