@@ -45,6 +45,8 @@ esac
 %doc
 
 %changelog
+* Wed Jan 23 2024 David Vanhoucke <dvanhoucke@redborder.com> - 0.1.6
+- Fix redborder-monitor
 * Thu Jan 18 2024 Miguel Negrón <manegron@redborder.com> - 0.1.5
 - Add journalctld configuration
 * Thu Dec 14 2023 Miguel Álvarez <malvarez@redborder.com> - 0.1.4
