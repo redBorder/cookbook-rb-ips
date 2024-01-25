@@ -1,0 +1,17 @@
+
+  Welcome to redborder-ng IPS [<%= node["hostname"] %>] (<%= node['platform'] %> - <%= node['platform_version'] %>):
+<% if !node["redborder"].nil? and !node["redborder"]["rpms"].nil? %>
+<% node["redborder"]["rpms"].each do |k, v| %>
+    * <%= "redborder-%-12s" % [ k ] %> => <%= v %>
+<% end %>
+<% end %>
+
+  Manager IP:   <%= @manager.chomp %>
+  Domain:       <%= @manager_info %>
+  CPUs:         <%= node["cpu"]["total"] unless node["cpu"].nil? %>
+  Memory:       <%= "%.2f GB" % [ node["memory"]["total"].to_f/(1000*1000) ] unless node["memory"].nil? %>
+  Host:         <%= node['ipaddress'] %> (<%= node['macaddress'].nil? ? "" : node['macaddress'] %>)
+  Segments:     <%= node["redborder"]["segments"].keys.size if (node["redborder"] and node["redborder"]["segments"] ) %>
+  Snort Groups: <%= node["redborder"]["snort"]["groups"].keys.size if (node["redborder"] and node["redborder"]["snort"]) %>
+  Installed on: <%= node["redborder"]["install_date"] if node["redborder"] %>
+  Last check:   <%= Time.at(node[:ohai_time]).strftime('%a %b %d %H:%M:%S %Z %Y') %>
