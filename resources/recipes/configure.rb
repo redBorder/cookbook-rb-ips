@@ -127,6 +127,7 @@ end
 #   end
 # end
 
+# Motd
 manager =`grep "cloud_address" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
 
 template "/etc/motd" do
@@ -135,7 +136,6 @@ template "/etc/motd" do
   group "root"
   mode 0644
   retries 2
-  # variables(:manager_info => ( virtual_ips["erchef"].nil? ? "erchef.#{node["redBorder"]["cdomain"]}" : virtual_ips["erchef"].to_s ) )
   variables(:manager_info => node["redborder"]["cdomain"], :manager => manager )
 end
 

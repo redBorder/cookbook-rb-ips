@@ -1,9 +1,15 @@
 
   Welcome to redborder-ng IPS [<%= node["hostname"] %>] (<%= node['platform'] %> - <%= node['platform_version'] %>):
+  Kernel: <%= node['os_version'].gsub("el9", "") %>
 <% if !node["redborder"].nil? and !node["redborder"]["rpms"].nil? %>
 <% node["redborder"]["rpms"].each do |k, v| %>
     * <%= "redborder-%-12s" % [ k ] %> => <%= v %>
 <% end %>
+<% end %>
+<% node["redborder"].each_pair do |key, value| %>
+  <% if key == "barnyard2" || key == "snort" %>
+    * <%= "%-22s" % [key + " version"] %> => <%= value["version"] %>
+  <% end %>
 <% end %>
 
   Manager IP:   <%= @manager.chomp %>
