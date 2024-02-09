@@ -68,6 +68,13 @@ cookbook_file "/etc/snortpcaps/verify.pcap" do
   mode "0400"
 end
 
+cookbook_file "/usr/share/GeoIP/country.dat" do
+  source "country.dat"
+  owner "root"
+  group "root"
+  mode "0644"
+end
+
 if sensor_id>0
   if node.name.start_with?"rbipscp-"
     node.run_list(["role[ipscp-sensor]", "role[rBsensor-#{sensor_id}]", "role[ipscp-sensor]"])
