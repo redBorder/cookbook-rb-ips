@@ -360,7 +360,7 @@ end # if node
 if !node["redborder"]["ipsrules"].nil? and !node["redborder"]["cloud"].nil? 
     node["redborder"]["ipsrules"].to_hash.each do |groupid, ipsrules| 
       if node["redborder"]["ipsrules"][groupid]["command"] and !node["redborder"]["ipsrules"][groupid]["command"].empty? and node["redborder"]["ipsrules"][groupid]["timestamp"].to_i > 0 and node["redborder"]["ipsrules"][groupid]["timestamp_last"].to_i < node["redborder"]["ipsrules"][groupid]["timestamp"].to_i and node["redborder"]["ipsrules"][groupid]["uuid"] and !node["redborder"]["ipsrules"][groupid]["uuid"].empty?
-        command=node["redborder"]["ipsrules"][groupid]["command"].to_s.gsub!(/^sudo /, "").gsub(/;/, " ")
+        command=node["redborder"]["ipsrules"][groupid]["command"].to_s.gsub(/^sudo /, "").gsub(/;/, " ")
         if command.start_with?'/bin/env BOOTUP=none /usr/lib/redborder/bin/rb_get_sensor_rules.sh '
           execute "download_rules_#{groupid}" do 
             command "/usr/lib/redborder/scripts/rb_get_sensor_rules_cloud.rb -c '#{command}' -u #{node["redborder"]["ipsrules"][groupid]["uuid"].to_s}"
