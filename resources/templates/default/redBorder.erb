@@ -26,4 +26,11 @@ redborder
     /usr/lib/redborder/bin/rb_u2pcap.sh, 
     /usr/lib/redborder/bin/rb_update_redborder_rpms.sh -f
 ".gsub(/\s+/, ' ').strip %>
-rb-monitor     ALL= NOPASSWD: /usr/lib/redborder/bin/rb_get_perfmonitor_stats.sh, /usr/lib/redborder/bin/rb_get_sensor.sh, /usr/lib/redborder/bin/rb_get_pfring_stats.sh, /bin/nice -n 19 /usr/sbin/fping -p 1 -c 10 kafka.<%= node["redborder"]["cdomain"] %>
+<%="
+rb-monitor
+  ALL= NOPASSWD:
+    /usr/lib/redborder/bin/rb_get_perfmonitor_stats.sh, 
+    /usr/lib/redborder/bin/rb_get_sensor.sh, 
+    /usr/lib/redborder/bin/rb_get_pfring_stats.sh, 
+    /bin/nice -n 19 /usr/sbin/fping -p 1 -c 10 kafka.#{["redborder"]["cdomain"]}
+".gsub(/\s+/, ' ').strip %>
