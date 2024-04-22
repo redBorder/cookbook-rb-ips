@@ -17,7 +17,7 @@ Defaults:rb-monitor !requiretty, !syslog
 <%="
 redborder
   ALL=NOPASSWD:SETENV: 
-    /bin/env BOOTUP=none /usr/lib/redborder/bin/rb_get_sensor_rules.sh *, 
+    /usr/bin/env BOOTUP=none /usr/lib/redborder/bin/rb_get_sensor_rules.sh *, 
     /usr/lib/redborder/bin/rb_bypass.sh, 
     /usr/lib/redborder/bin/rb_wakeup_chef.sh, 
     /usr/lib/redborder/bin/rb_disassociate_sensor.sh -f, 
