@@ -1,4 +1,4 @@
-require 'set'
+# require 'set' TODO: refactor to this
 #Default attributes
 
 #general
@@ -57,7 +57,8 @@ default["redborder"]["memory_services"]["redborder-monitor"] = {"count" => 5, "m
 default["redborder"]["memory_services"]["snortd"] = {"count" => 10, "memory" => 0}
 default["redborder"]["memory_services"]["barnyard2"] = {"count" => 10, "memory" => 0}
 # excluded mem services
-default['redborder']['excluded_memservices'] = Set.new(['chef-client']) # Don't assign memory to chef because the service will get handled
+# default['redborder']['excluded_memservices'] = Set.new(['chef-client']) TODO: refactor this
+default['redborder']['excluded_memservices'] = ['chef-client'] # Don't assign memory to chef because the service will get handled
 
 default["redborder"]["services"] = {}
 default["redborder"]["services"]["chef-client"]               = true
@@ -72,4 +73,4 @@ default["redborder"]["systemdservices"]["redborder-monitor"]      = ["redborder-
 default["redborder"]["systemdservices"]["snmp"]                   = ["snmpd"]
 default["redborder"]["systemdservices"]["rsyslog"]                = ["rsyslog"]
 default["redborder"]["systemdservices"]["snortd"]                 = ["snortd"]
-default["redborder"]["systemdservices"]["barnyard2"]               = ["barnyard2"]
+default["redborder"]["systemdservices"]["barnyard2"]              = ["barnyard2"]
