@@ -3,8 +3,7 @@ module Rb_ips
   module Helpers
     def memory_services(sysmem_total, excluded_services=[])
       memory_serv = {}
-      memory_services_size = 0
-      memory_services_size_total = 0
+      memory_services_size = memory_services_size_total = 0
       memlimit_found = false
       sysmem_total_limitsless = nil
       
