@@ -1,7 +1,6 @@
-require 'set'
 module Rb_ips
     module Helpers
-        def memory_services(sysmem_total, excluded_services)
+        def memory_services(sysmem_total, excluded_services=[])
         memory_serv = {}
         memory_services_size = 0
         memory_services_size_total = 0
@@ -51,4 +50,3 @@ module Rb_ips
         end
     end
 end
-  
