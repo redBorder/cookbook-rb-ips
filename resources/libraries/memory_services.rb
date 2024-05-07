@@ -8,18 +8,14 @@ module Rb_ips
       memlimit_found = false
       sysmem_total_limitsless = nil
       
-      node["redborder"]["memory_services"].each do |name,mem_s|
+      node["redborder"]["memory_services"].each do |name, mem_s|
         if node["redborder"]["services"][name] and !excluded_services.include?(name)
           memory_services_size = memory_services_size + mem_s["count"] 
         end
         memory_services_size_total = memory_services_size_total + mem_s["count"]
       end
-      if memory_services_size <= 0
-        if memory_services_size_total > 0
-          memory_services_size = memory_services_size_total
-        else
-          memory_services_size = 1
-        end
+      unless memory_services_size.positive?
+        memory_services_size = memory_services_size_total.positive? ? memory_services_size_total : 1
       end
 
       node["redborder"]["memory_services"].each do |name,mem_s|
