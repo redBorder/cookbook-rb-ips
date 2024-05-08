@@ -56,9 +56,9 @@ default["redborder"]["memory_services"]["snmp"] = {"count" => 5, "memory" => 0, 
 default["redborder"]["memory_services"]["redborder-monitor"] = {"count" => 5, "memory" => 0, "max_limit" => 20000 }
 default["redborder"]["memory_services"]["snortd"] = {"count" => 10, "memory" => 0}
 default["redborder"]["memory_services"]["barnyard2"] = {"count" => 10, "memory" => 0}
-# excluded mem services
-# default['redborder']['excluded_memservices'] = Set.new(['chef-client']) TODO: refactor this
-default['redborder']['excluded_memory_services'] = %[chef-client] # Don't assign memory to chef because the service will get handled
+
+# exclude mem services, setting memory to 0 for each.
+default["redborder"]["excluded_memory_services"] = ["chef-client"]
 
 default["redborder"]["services"] = {}
 default["redborder"]["services"]["chef-client"]               = true
