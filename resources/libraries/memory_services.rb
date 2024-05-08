@@ -9,9 +9,9 @@ module Rb_ips
       
       node["redborder"]["memory_services"].each do |name, mem_s|
         if node["redborder"]["services"][name] and !excluded_services.include?(name)
-          memory_services_size = memory_services_size + mem_s["count"] 
+          memory_services_size += mem_s["count"] 
         end
-        memory_services_size_total = memory_services_size_total + mem_s["count"]
+        memory_services_size_total += mem_s["count"]
       end
       unless memory_services_size.positive?
         memory_services_size = memory_services_size_total.positive? ? memory_services_size_total : 1
