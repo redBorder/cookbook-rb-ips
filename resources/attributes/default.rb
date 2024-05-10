@@ -1,3 +1,4 @@
+# require 'set' TODO: refactor to this
 #Default attributes
 
 #general
@@ -56,6 +57,9 @@ default["redborder"]["memory_services"]["redborder-monitor"] = {"count" => 5, "m
 default["redborder"]["memory_services"]["snortd"] = {"count" => 10, "memory" => 0}
 default["redborder"]["memory_services"]["barnyard2"] = {"count" => 10, "memory" => 0}
 
+# exclude mem services, setting memory to 0 for each.
+default["redborder"]["excluded_memory_services"] = ["chef-client"]
+
 default["redborder"]["services"] = {}
 default["redborder"]["services"]["chef-client"]               = true
 default["redborder"]["services"]["redborder-monitor"]         = true
@@ -69,5 +73,4 @@ default["redborder"]["systemdservices"]["redborder-monitor"]      = ["redborder-
 default["redborder"]["systemdservices"]["snmp"]                   = ["snmpd"]
 default["redborder"]["systemdservices"]["rsyslog"]                = ["rsyslog"]
 default["redborder"]["systemdservices"]["snortd"]                 = ["snortd"]
-default["redborder"]["systemdservices"]["barnyard2"]               = ["barnyard2"]
-
+default["redborder"]["systemdservices"]["barnyard2"]              = ["barnyard2"]
