@@ -1,7 +1,7 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
-## 0.2.0
+## 0.1.10
 
   - Miguel Álvarez
     - [5642a49] Check if service is excluded from mem services
