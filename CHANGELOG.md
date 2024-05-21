@@ -1,6 +1,12 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 0.1.11
+
+  - Miguel Negron
+    - [9d042ae] Call rb_get_sensor_rules_cloud.rb using rvm
+
+
 ## 0.1.10
 
   - Miguel Álvarez
