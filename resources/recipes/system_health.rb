@@ -14,8 +14,8 @@ execute 'restart_barnyard2' do
   action :nothing
 end
 
-# Check services that are not from systemd that should be running
-ruby_block 'check_services_health' do
+# Check barnyard2 health
+ruby_block 'check_barnyard2_health' do
   block do
     is_enabled = node['redborder']['services']["barnyard2"]
     next unless is_enabled
@@ -28,5 +28,5 @@ end
 
 # Run the health check at the end of the chef run
 at_exit do
-  Chef.run_context.resource_collection.find('ruby_block[check_services_health]').run_action(:run)
+  Chef.run_context.resource_collection.find('ruby_block[check_barnyard2_health]').run_action(:run)
 end
