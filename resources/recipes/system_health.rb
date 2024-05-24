@@ -17,10 +17,9 @@ end
 # Check barnyard2 health
 ruby_block 'check_barnyard2_health' do
   block do
-    is_enabled = node['redborder']['services']["barnyard2"]
-    next unless is_enabled
-    unless system("/etc/init.d/barnyard2 status > /dev/null 2>&1")
-      resources(execute: "restart_barnyard2").run_action(:run)      
+    barnyard2_is_enabled = node['redborder']['services']["barnyard2"]
+    if barnyard2_is_enabled && !system("/etc/init.d/barnyard2 status > /dev/null 2>&1")
+      resources(execute: 'restart_barnyard2').run_action(:run)
     end
   end
   action :nothing
