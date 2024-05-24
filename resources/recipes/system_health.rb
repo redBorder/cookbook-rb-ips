@@ -9,7 +9,8 @@
 
 # Restart barnyard2 service
 execute 'restart_barnyard2' do
-  command 'service barnyard2 restart'
+  ignore_failure true
+  command 'systemctl restart barnyard2 > /dev/null 2>&1'
   action :nothing
 end
 
