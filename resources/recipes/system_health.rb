@@ -1,6 +1,6 @@
 #
 # Cookbook:: ips
-# Recipe:: prepare_system
+# Recipe:: system_health
 #
 # Copyright:: 2024, redborder
 #
