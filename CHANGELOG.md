@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 0.2.0
+
+  - Miguel Negrón
+    - [4c0db88] Add configure common cookbook call (#25)
+
 ## 0.1.11
 
   - Miguel Negron

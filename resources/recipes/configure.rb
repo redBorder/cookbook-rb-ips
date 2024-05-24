@@ -43,6 +43,10 @@ sensor_id = node["redborder"]["sensor_id"].to_i rescue 0
 
 # managers      = managers.sort{|a,b| (a["rb_time"]||999999999999999999999) <=> (b["rb_time"]||999999999999999999999)}
 
+rb_common_config "Configure common" do
+  action :configure
+end
+
 rb_selinux_config "Configure Selinux" do
   if shell_out("getenforce").stdout.chomp == "Disabled"
     action :remove
