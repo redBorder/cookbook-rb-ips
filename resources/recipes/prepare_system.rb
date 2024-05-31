@@ -52,13 +52,13 @@ cdomain = "redborder.cluster"
 node.default["redborder"]["cdomain"] = cdomain
 
 #get sensors info
-node.default["redborder"]["sensors_info"] = get_sensors_info()
+node.run_state["sensors_info"] = get_sensors_info()
 
 #get sensors info full info
-node.default["redborder"]["sensors_info_all"] = get_sensors_all_info()
+node.run_state["sensors_info_all"] = get_sensors_all_info()
 
 #get namespaces
-node.default["redborder"]["namespaces"] = get_namespaces
+node.run_state["namespaces"] = get_namespaces
 
 #memory
 #getting total system memory less 10% reserved by system
