@@ -1,11 +1,17 @@
-# ips Cookbook
+# cookbook-rb-ips
+[![Build Status][build-shield]][build-url]
+[![Linters][linters-shield]][linters-url]
+[![License][license-shield]][license-url]
+
+<!-- Badges -->
+[build-shield]: https://github.com/redBorder/cookbook-rb-ips/actions/workflows/rpm.yml/badge.svg?branch=master
+[build-url]: https://github.com/redBorder/cookbook-rb-ips/actions/workflows/rpm.yml?query=branch%3Amaster
+[linters-shield]: https://github.com/redBorder/cookbook-rb-ips/actions/workflows/lint.yml/badge.svg?event=push
+[linters-url]: https://github.com/redBorder/cookbook-rb-ips/actions/workflows/lint.yml
+[license-shield]: https://img.shields.io/badge/license-AGPLv3-blue.svg
+[license-url]: https://github.com/cookbook-rb-ips/blob/HEAD/LICENSE
 
 Cookbook to configure a redborder ips
-
-## Requirements
-
-depends 'kafka', '0.0.1'
-depends 'zookeeper', '0.0.1'
 
 ### Platforms
 
@@ -13,15 +19,7 @@ depends 'zookeeper', '0.0.1'
 
 ### Chef
 
-- Chef 12.0 or later
-
-# BUILDING
-
-- Build rpm package for redborder platform:
-  * git clone https://github.com/redborder/cookbook-rb-ips.git
-  * cd cookbook-rb-ips
-  * make
-  * RPM packages is under packaging/rpm/pkgs/
+- Chef 15.7.0 or later
 
 ## Contributing
 
@@ -33,8 +31,5 @@ depends 'zookeeper', '0.0.1'
 6. Submit a Pull Request using Github
 
 ## License
-GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007
 
-## Authors
-Miguel Negrón <manegron@redborder.com>
-David Vanhoucke <dvanhoucke@redborder.com>
+GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007

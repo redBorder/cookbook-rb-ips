@@ -1,6 +1,14 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 0.3.1
+
+  - David Vanhoucke
+    - [812d8cb] add temporary variables in node.run_state
+  - Miguel Negrón
+    - [8df0ab4] Update rpm.yml
+    - [ddfebf9] Update README.md
+
 ## 0.3.0
 
   - Miguel Negrón
