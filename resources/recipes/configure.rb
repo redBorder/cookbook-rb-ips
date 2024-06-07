@@ -232,7 +232,7 @@ template "/etc/sensor_id" do
 end
 
 geoip_config "Configure GeoIP" do
-    action (ips_services["geoip"] ? :add : :remove)
+    action :add
 end
 
 snmp_config "Configure snmp" do
