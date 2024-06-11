@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 0.3.3
+
+  - Miguel Negrón
+    - [81600e3] Improvement/fix lint (#33)
+
 ## 0.3.2
 
   - Miguel Negron
