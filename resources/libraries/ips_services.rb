@@ -1,13 +1,25 @@
 class Chef
-    class Recipe
-      def ips_services()
-        ips_services  = {}
-        node["redborder"]["services"].each { |k,v| ips_services[k] = v if (v==true or v==false) } if !node["redborder"]["services"].nil?
-        
-        # changing default values in case of the user has modify them
-        node["redborder"]["services"]["overwrite"].each { |k,v| ips_services[k] = v if (v==true or v==false) } if !node["redborder"]["services"]["overwrite"].nil?
-        
-        return ips_services
+  class Recipe
+    def ips_services
+      ips_services = {}
+      if node['redborder']['services']
+        node['redborder']['services'].each do |k, v|
+          if v == true || v == false
+            ips_services[k] = v
+          end
+        end
       end
+
+      # changing default values in case of the user has modify them
+      if node['redborder']['services']['overwrite']
+        node['redborder']['services']['overwrite'].each do |k, v|
+          if v == true || v == false
+            ips_services[k] = v
+          end
+        end
+      end
+
+      ips_services
     end
   end
+end
