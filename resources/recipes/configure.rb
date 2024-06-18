@@ -250,6 +250,10 @@ snmp_config 'Configure snmp' do
   end
 end
 
+rb_exporter_config "Configure rb-exporter" do
+  action (ips_services["redborder-exporter"] ? [:add] : [:remove])
+end
+
 # rsyslog_config "Configure rsyslog" do
 #   vault_nodes node.run_state["sensors_info_all"]["vault-sensor"]
 #   action (ips_services["rsyslog"] ? [:add] : [:remove])
