@@ -250,8 +250,12 @@ snmp_config 'Configure snmp' do
   end
 end
 
-rb_exporter_config "Configure rb-exporter" do
-  action (ips_services["redborder-exporter"] ? [:add] : [:remove])
+rb_exporter_config 'Configure rb-exporter' do
+  if ips_services['redborder-exporter']
+    action :add
+  else
+    action :remove
+  end
 end
 
 # rsyslog_config "Configure rsyslog" do
