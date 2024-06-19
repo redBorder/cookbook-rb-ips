@@ -434,6 +434,10 @@ rbcgroup_config "Configure cgroups" do
   action :add 
 end
 
+rb_clamav_config 'Configure ClamAV' do
+  action(manager_services['clamav'] ? :add : :remove)
+end
+
 execute "force_chef_client_wakeup" do
     command "/usr/lib/redborder/bin/rb_wakeup_chef"
     ignore_failure true
