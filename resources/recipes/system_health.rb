@@ -1,22 +1,21 @@
-#
 # Cookbook:: ips
-# Recipe:: system_health
-#
+# Recipe:: prepare_system
 # Copyright:: 2024, redborder
-#
-# AFFERO GENERAL PUBLIC LICENSE V3
-#
+# License:: Affero General Public License, Version 3
 
-# Check services that are not from systemd that should be running
-ruby_block 'check_services_health' do
+# Restart barnyard2 service
+execute 'restart_barnyard2' do
+  ignore_failure true
+  command 'systemctl restart barnyard2 > /dev/null 2>&1'
+  action :nothing
+end
+
+# Check barnyard2 health
+ruby_block 'check_barnyard2_health' do
   block do
-    ['barnyard2'].each do |service|
-      is_enabled = node['redborder']['services'][service]
-      next unless is_enabled
-      unless system("/etc/init.d/#{service} status > /dev/null 2>&1")
-        restart_output = `/etc/init.d/#{service} restart`
-        puts "#{restart_output}"
-      end
+    barnyard2_is_enabled = node['redborder']['services']['barnyard2']
+    if barnyard2_is_enabled && !system('/etc/init.d/barnyard2 status > /dev/null 2>&1')
+      resources(execute: 'restart_barnyard2').run_action(:run)
     end
   end
   action :nothing
@@ -24,5 +23,5 @@ end
 
 # Run the health check at the end of the chef run
 at_exit do
-  Chef.run_context.resource_collection.find('ruby_block[check_services_health]').run_action(:run)
+  Chef.run_context.resource_collection.find('ruby_block[check_barnyard2_health]').run_action(:run)
 end

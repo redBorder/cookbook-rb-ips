@@ -1,6 +1,6 @@
 
   Welcome to redborder-ng IPS [<%= node["hostname"] %>] (<%= node['platform'] %> - <%= node['platform_version'] %>):
-  Kernel: <%= node['os_version'].gsub("el9", "") %>
+  Kernel: <%= node['os_version'] %>
   
 <% if !node["redborder"].nil? and !node["redborder"]["rpms"].nil? %>
 <% node["redborder"]["rpms"].each do |k, v| %>
