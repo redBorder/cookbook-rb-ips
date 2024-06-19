@@ -468,7 +468,7 @@ rbcgroup_config 'Configure cgroups' do
 end
 
 rb_clamav_config 'Configure ClamAV' do
-  action(manager_services['clamav'] ? :add : :remove)
+  action(ips_services['clamav'] ? :add : :remove)
 end
 
 execute 'force_chef_client_wakeup' do
