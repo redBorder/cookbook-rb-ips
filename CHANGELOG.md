@@ -9,7 +9,6 @@ cookbook-rb-ips CHANGELOG
     - [38ca49a] Fix merge conflicts
     - [b5c40f8] Add clamAV
   - David Vanhoucke
-    - [2bdb85f] fix lint
     - [0c5d6f6] add exporter service to ips
 
 ## 0.4.0
