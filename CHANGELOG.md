@@ -1,6 +1,16 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 0.4.0
+
+  - Miguel Álvarez
+    - [76a3d79] Update metadata.rb
+    - [5832c9a] Fix services
+    - [38ca49a] Fix merge conflicts
+    - [b5c40f8] Add clamAV
+  - David Vanhoucke
+    - [0c5d6f6] add exporter service to ips
+
 ## 0.3.3
 
   - Miguel Negrón

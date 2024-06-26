@@ -250,6 +250,14 @@ snmp_config 'Configure snmp' do
   end
 end
 
+rb_exporter_config 'Configure rb-exporter' do
+  if ips_services['redborder-exporter']
+    action :add
+  else
+    action :remove
+  end
+end
+
 # rsyslog_config "Configure rsyslog" do
 #   vault_nodes node.run_state["sensors_info_all"]["vault-sensor"]
 #   action (ips_services["rsyslog"] ? [:add] : [:remove])
@@ -465,6 +473,10 @@ end
 
 rbcgroup_config 'Configure cgroups' do
   action :add
+end
+
+rb_clamav_config 'Configure ClamAV' do
+  action(ips_services['clamav'] ? :add : :remove)
 end
 
 execute 'force_chef_client_wakeup' do
