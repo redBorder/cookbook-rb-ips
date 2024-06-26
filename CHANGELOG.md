@@ -11,12 +11,6 @@ cookbook-rb-ips CHANGELOG
   - David Vanhoucke
     - [0c5d6f6] add exporter service to ips
 
-## 0.4.0
-
-  - David Vanhoucke
-    - [2bdb85f] fix lint
-    - [0c5d6f6] add exporter service to ips
-
 ## 0.3.3
 
   - Miguel Negrón
