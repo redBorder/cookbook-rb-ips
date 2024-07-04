@@ -144,7 +144,12 @@ end
 # end
 
 # Motd
-manager = `grep "cloud_address" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
+
+if node['redborder']['cloud']
+  manager = `grep "cloud_address" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
+else
+  manager = `grep "webui_host" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
+end
 
 template '/etc/motd' do
   source 'motd.erb'
