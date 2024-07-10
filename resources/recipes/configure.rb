@@ -145,11 +145,11 @@ end
 
 # Motd
 
-if node['redborder']['cloud']
-  manager = `grep "cloud_address" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
-else
-  manager = `grep "webui_host" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
-end
+manager = if node['redborder']['cloud']
+            `grep "cloud_address" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
+          else
+            `grep "webui_host" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
+          end
 
 template '/etc/motd' do
   source 'motd.erb'
@@ -205,7 +205,7 @@ rescue
   ssh_secrets = {}
 end
 
-if !node['redborder']['cloud']
+unless node['redborder']['cloud']
   # ssh user for webui execute commands on
   execute 'create_user_redBorder' do
     command 'sudo useradd -m -s /bin/bash redBorder'
