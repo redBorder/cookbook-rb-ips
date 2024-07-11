@@ -36,7 +36,7 @@ ruby_block 'update_hosts_file_if_needed' do
 
       # Update /etc/hosts if a matching node is found
       if matching_node_name
-        node_name_with_suffix = "#{matching_node_name}.#{node['redborder']['cdomain']}"
+        node_name_with_suffix = "#{matching_node_name}.node.#{node['redborder']['cdomain']}"
         hosts_file = '/etc/hosts'
 
         unless ::File.readlines(hosts_file).grep(/#{Regexp.escape(node_name_with_suffix)}/).any?
