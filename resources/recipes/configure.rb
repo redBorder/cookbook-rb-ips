@@ -479,6 +479,15 @@ rb_clamav_config 'Configure ClamAV' do
   action(ips_services['clamav'] ? :add : :remove)
 end
 
+rb_chrony_config 'Configure Chrony' do
+  ntp_servers node['redborder']['ntp']['servers']
+  if ips_services['chrony']
+    action :add
+  else
+    action :remove
+  end
+end
+
 execute 'force_chef_client_wakeup' do
   command '/usr/lib/redborder/bin/rb_wakeup_chef'
   ignore_failure true
