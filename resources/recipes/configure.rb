@@ -190,7 +190,7 @@ template '/etc/chef/role-sensor-once.json' do
   variables(sensor_id: sensor_id)
 end
 
-template '/etc/sudoers.d/redborder' do
+template '/etc/sudoers.d/redBorder' do
   source 'redBorder.erb'
   cookbook 'rb-ips'
   owner 'root'
@@ -206,25 +206,24 @@ rescue
 end
 
 unless node['redborder']['cloud']
-  # Commented because redBorder user is legacy
   # ssh user for webui execute commands on
-  # execute 'create_user_redBorder' do
-  #   command 'sudo useradd -m -s /bin/bash redBorder'
-  #   not_if 'getent passwd redBorder'
-  # end
+  execute 'create_user_redBorder' do
+    command 'sudo useradd -m -s /bin/bash redBorder'
+    not_if 'getent passwd redBorder'
+  end
 
-  directory '/home/redborder/.ssh' do
-    owner 'redborder'
-    group 'redborder'
+  directory '/home/redBorder/.ssh' do
+    owner 'redBorder'
+    group 'redBorder'
     mode '0755'
     action :create
   end
 
   unless ssh_secrets.empty? || ssh_secrets['public_rsa'].nil?
-    template '/home/redborder/.ssh/authorized_keys' do
+    template '/home/redBorder/.ssh/authorized_keys' do
       source 'rsa.pub.erb'
-      owner 'redborder'
-      group 'redborder'
+      owner 'redBorder'
+      group 'redBorder'
       mode '0600'
       variables(
         public_rsa: ssh_secrets['public_rsa']
