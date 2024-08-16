@@ -144,7 +144,12 @@ end
 # end
 
 # Motd
-manager = `grep "cloud_address" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
+
+manager = if node['redborder']['cloud']
+            `grep "cloud_address" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
+          else
+            `grep "webui_host" /etc/redborder/rb_init_conf.yml | cut -d' ' -f2`
+          end
 
 template '/etc/motd' do
   source 'motd.erb'
@@ -194,6 +199,39 @@ template '/etc/sudoers.d/redBorder' do
   retries 2
 end
 
+begin
+  ssh_secrets = data_bag_item('passwords', 'ssh')
+rescue
+  ssh_secrets = {}
+end
+
+unless node['redborder']['cloud']
+  # ssh user for webui execute commands on
+  execute 'create_user_redBorder' do
+    command 'sudo useradd -m -s /bin/bash redBorder'
+    not_if 'getent passwd redBorder'
+  end
+
+  directory '/home/redBorder/.ssh' do
+    owner 'redBorder'
+    group 'redBorder'
+    mode '0755'
+    action :create
+  end
+
+  unless ssh_secrets.empty? || ssh_secrets['public_rsa'].nil?
+    template '/home/redBorder/.ssh/authorized_keys' do
+      source 'rsa.pub.erb'
+      owner 'redBorder'
+      group 'redBorder'
+      mode '0600'
+      variables(
+        public_rsa: ssh_secrets['public_rsa']
+      )
+      action :create
+    end
+  end
+end
 # template "/opt/rb/etc/sysconfig/iptables" do
 #   source "iptables.erb"
 #   owner "root"
