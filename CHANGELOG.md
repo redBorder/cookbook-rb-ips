@@ -1,6 +1,17 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 0.4.1
+
+  - Luis Blanco
+    - [ac6f35a] Fix node name
+  - Miguel Álvarez
+    - [8bb737e] Update system_health.rb
+    - [6d1f480] Fix motd when ssh version
+    - [3b39cfa] Only create ssh user if not cloud registration
+    - [fabdd03] Add rsa pub key
+    - [01a3935] Configure redBorder user
+
 ## 0.4.0
 
   - Miguel Álvarez
