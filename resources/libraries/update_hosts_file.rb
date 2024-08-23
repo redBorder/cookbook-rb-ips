@@ -12,17 +12,16 @@ module RbIps
       # - The values are arrays of services associated with each IP address.
       # - If an IP is missing from a data bag, the associated services are grouped under the sync_ip key.
       grouped_virtual_ips = Hash.new { |hash, key| hash[key] = [] }
-      databags = Chef::DataBag.load('rBglobal').keys rescue {}
+      databags = Chef::DataBag.load('rBglobal').keys
       databags.each do |bag|
-        if bag.start_with?('ipvirtual-external')
-          virtual_dg = Chef::DataBagItem.load('rBglobal', bag) rescue {}
-          ip = virtual_dg['ip']
+        return unless bag.start_with?('ipvirtual-external')
+        virtual_dg = data_bag_item('rBglobal', bag)
+        ip = virtual_dg['ip']
 
-          if ip && !ip.empty?
-            grouped_virtual_ips[ip] << bag.gsub('ipvirtual-external-', '')
-          else
-            grouped_virtual_ips[manager_ip[0]] << bag.gsub('ipvirtual-external-', '')
-          end
+        if ip && !ip.empty?
+          grouped_virtual_ips[ip] << bag.gsub('ipvirtual-external-', '')
+        else
+          grouped_virtual_ips[manager_ip[0]] << bag.gsub('ipvirtual-external-', '')
         end
       end
 
@@ -41,7 +40,7 @@ module RbIps
         new_services.each do |new_service|
           service_key = new_service.split('.').first
 
-          hosts_hash.each do |ip, services|
+          hosts_hash.each do |_ip, services|
             services.delete_if { |service| service.split('.').first == service_key }
           end
 

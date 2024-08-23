@@ -80,14 +80,14 @@ end
 
 hosts_entries = update_hosts_file()
 
-template "/etc/hosts" do
-  source "hosts.erb"
+template '/etc/hosts' do
+  source 'hosts.erb'
   cookbook 'rb-ips'
-  owner "root"
-  group "root"
-  mode 0644
+  owner 'root'
+  group 'root'
+  mode '644'
   retries 2
-  variables(:hosts_entries => hosts_entries)
+  variables(hosts_entries: hosts_entries)
 end
 
 # Motd
