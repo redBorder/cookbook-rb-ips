@@ -57,7 +57,8 @@ module RbIps
       # Prepare the lines for the hosts file
       hosts_entries = []
       hosts_hash.each do |ip, services|
-        hosts_entries << "#{ip} #{services.join(' ')}" unless services.empty?
+        format_entry = format('%-18s%s', ip, services.join(' '))
+        hosts_entries << format_entry unless services.empty?
       end
 
       hosts_entries
