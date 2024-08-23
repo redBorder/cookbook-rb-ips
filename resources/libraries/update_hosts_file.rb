@@ -14,7 +14,7 @@ module RbIps
       grouped_virtual_ips = Hash.new { |hash, key| hash[key] = [] }
       databags = Chef::DataBag.load('rBglobal').keys
       databags.each do |bag|
-        return unless bag.start_with?('ipvirtual-external')
+        next unless bag.start_with?('ipvirtual-external')
         virtual_dg = data_bag_item('rBglobal', bag)
         ip = virtual_dg['ip']
 
