@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 0.6.0
+
+  - Miguel Alvarez
+    - [d466315] Add chronyd
+
 ## 0.5.0
 
   - Miguel Álvarez
