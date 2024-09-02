@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 0.7.0
+
+  - nilsver
+    - [786c54e] Adapt /etc/hosts to support manager external Virtual IPs
+
 ## 0.6.0
 
   - Miguel Alvarez
