@@ -32,22 +32,6 @@ rescue
   sensor_id = 0
 end
 
-# managers      = []
-# managers_keys = Chef::Node.list.keys.sort
-# managers_keys.each do |m_key|
-#   m = Chef::Node.load m_key
-#   begin
-#     roles = m.roles
-#   rescue NoMethodError
-#     roles = []
-#   end
-#   if roles.include?("manager")
-#     managers << m
-#   end
-# end
-
-# managers      = managers.sort{|a,b| (a["rb_time"]||999999999999999999999) <=> (b["rb_time"]||999999999999999999999)}
-
 rb_common_config 'Configure common' do
   action :configure
 end
@@ -94,54 +78,17 @@ if sensor_id > 0
   end
 end
 
-# virtual_ips = {}
+hosts_entries = update_hosts_file()
 
-# if resolv_dns_dg["enable"]
-#   virtual_ips_names=["erchef", "kafka", "riak", "rb-webui"]
-#   hasprivate=false
-#   virtual_ips_names.each do |s|
-#     virtual_dg = Chef::DataBagItem.load("rBglobal", "ipvirtual-external-#{s}") rescue ipvirtual_dg =  {}
-#     if !virtual_dg["ip"].nil?  and virtual_dg["ip"]!="" and virtual_dg["ip"] =~ ip_regex
-#       virtual_ips[s] = virtual_dg["ip"]
-#     else
-#       hasprivate=true
-#     end
-#   end
-
-#   if hasprivate
-#     # I need to search the first manager with valid IP
-#     ip_manager  = nil
-#     managers.each do |m|
-#       if !m["redBorder"]["manager"][m["redBorder"]["manager"]["management_bond"]].nil?
-#         if m["redBorder"]["manager"][m["redBorder"]["manager"]["management_bond"]]["ip"] =~ ip_regex
-#           ip_manager=m["redBorder"]["manager"][m["redBorder"]["manager"]["management_bond"]]["ip"]
-#           break
-#         end
-#       end
-#     end
-
-#     if !ip_manager.nil?
-#       virtual_ips_names.each do |s|
-#         virtual_ips[s]=ip_manager if virtual_ips[s].nil?
-#       end
-#     elsif managers.size>0
-#       virtual_ips_names.each do |s|
-#         virtual_ips[s]=managers[0]["ipaddress"] if virtual_ips[s].nil?
-#       end
-#     end
-#   end
-
-#   unless virtual_ips.values.include?"127.0.0.1"
-#     template "/etc/hosts" do
-#       source "hosts.erb"
-#       owner "root"
-#       group "root"
-#       mode 0644
-#       retries 2
-#       variables(:virtual_ips => virtual_ips, :managers => managers)
-#     end
-#   end
-# end
+template '/etc/hosts' do
+  source 'hosts.erb'
+  cookbook 'rb-ips'
+  owner 'root'
+  group 'root'
+  mode '644'
+  retries 2
+  variables(hosts_entries: hosts_entries)
+end
 
 # Motd
 
