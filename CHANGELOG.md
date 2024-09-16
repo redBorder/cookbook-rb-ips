@@ -1,6 +1,13 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 0.7.1
+
+  - Luis J Blanco Mier
+    - [9630389] add clean operation in makefile
+  - Jose Navarro
+    - [2289d8e] Migrate view raw funtionality
+
 ## 0.7.0
 
   - nilsver
