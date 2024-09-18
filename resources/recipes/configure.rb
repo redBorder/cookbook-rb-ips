@@ -155,22 +155,22 @@ end
 unless node['redborder']['cloud']
   # ssh user for webui execute commands on
   execute 'create_user_redBorder' do
-    command 'sudo useradd -m -s /bin/bash redBorder'
-    not_if 'getent passwd redBorder'
+    command 'sudo useradd -m -s /bin/bash redborder'
+    not_if 'getent passwd redborder'
   end
 
-  directory '/home/redBorder/.ssh' do
-    owner 'redBorder'
-    group 'redBorder'
+  directory '/home/redborder/.ssh' do
+    owner 'redborder'
+    group 'redborder'
     mode '0755'
     action :create
   end
 
   unless ssh_secrets.empty? || ssh_secrets['public_rsa'].nil?
-    template '/home/redBorder/.ssh/authorized_keys' do
+    template '/home/redborder/.ssh/authorized_keys' do
       source 'rsa.pub.erb'
-      owner 'redBorder'
-      group 'redBorder'
+      owner 'redborder'
+      group 'redborder'
       mode '0600'
       variables(
         public_rsa: ssh_secrets['public_rsa']
