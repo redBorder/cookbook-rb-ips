@@ -34,7 +34,7 @@ module RbIps
       hosts_hash
     end
 
-    def update_hosts_file()
+    def update_hosts_file
       setup_ip = get_setup_ip
       reg_mode = registration_mode
       running_services = node['redborder']['systemdservices'].values.flatten if node['redborder']['systemdservices']
@@ -44,7 +44,7 @@ module RbIps
       # Hash where services (from databag) are grouped by ip
       grouped_virtual_ips = Hash.new { |hash, key| hash[key] = [] }
       databags.each do |bag|
-        virtual_dg = data_bag_item('rBglobal', "ipvirtual-external-#{bag}") rescue {}
+        virtual_dg = data_bag_item('rBglobal', "ipvirtual-external-#{bag}")
         ip = virtual_dg['ip']
 
         if ip && !ip.empty?
