@@ -64,7 +64,6 @@ module RbIps
           # Avoids having duplicate services in the list
           service_key = new_service.split('.').first
           hosts_hash.each do |_ip, services|
-            services_before = services.dup
             services.delete_if { |service| service.split('.').first == service_key }
           end
 
