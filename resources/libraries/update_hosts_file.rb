@@ -94,8 +94,3 @@ module RbIps
     end
   end
 end
-
-
-# 127.0.0.1         localhost localhost.localdomain localhost4 localhost4.localdomain4
-# ::1               localhost localhost.localdomain localhost6 localhost6.localdomain6
-# 10.1.202.214	  data.redborder.cluster rbips-18.node erchef.redborder.cluster rbookshelf.s3.redborder.cluster redborder.cluster s3.service erchef.service http2k.service rb-nils.node f2k.service f2k.redborder.cluster kafka.service kafka.redborder.cluster sfacctd.service sfacctd.redborder.cluster webui.service webui.redborder.cluster
