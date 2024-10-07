@@ -56,17 +56,20 @@ module RbIps
 
       # Add running services to localhost
       grouped_virtual_ips['127.0.0.1'] ||= []
-      running_services.each { |serv| grouped_virtual_ips['127.0.0.1'] << "#{serv}.service" }
+      running_services.each { |serv| grouped_virtual_ips['127.0.0.1'] << serv }
 
       # Group services
       grouped_virtual_ips.each do |new_ip, new_services|
         new_services.each do |new_service|
-          # Remove suffix and get services
+          # Avoids having duplicate services in the list
           service_key = new_service.split('.').first
-          hosts_hash.each { |_ip, services| services.delete_if { |service| service.split('.').first == service_key } }
+          hosts_hash.each do |_ip, services|
+            services_before = services.dup
+            services.delete_if { |service| service.split('.').first == service_key }
+          end
 
           # Add running services to localhost
-          if running_services.include?(new_service)
+          if new_ip == '127.0.0.1' && running_services.include?(new_service)
             hosts_hash['127.0.0.1'] << "#{new_service}.service"
             next
           end
@@ -92,3 +95,8 @@ module RbIps
     end
   end
 end
+
+
+# 127.0.0.1         localhost localhost.localdomain localhost4 localhost4.localdomain4
+# ::1               localhost localhost.localdomain localhost6 localhost6.localdomain6
+# 10.1.202.214	  data.redborder.cluster rbips-18.node erchef.redborder.cluster rbookshelf.s3.redborder.cluster redborder.cluster s3.service erchef.service http2k.service rb-nils.node f2k.service f2k.redborder.cluster kafka.service kafka.redborder.cluster sfacctd.service sfacctd.redborder.cluster webui.service webui.redborder.cluster
