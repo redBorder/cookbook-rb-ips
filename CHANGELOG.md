@@ -1,6 +1,95 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 1.0.0
+
+  - Miguel Negrón
+    - [2a1fa2d] Merge pull request #46 from redBorder/bugfix/18716_remove_sync_ip_from_hosts_file
+    - [176323b] Merge pull request #44 from redBorder/development
+    - [0b0e324] Merge pull request #42 from redBorder/development
+    - [215b2b1] Merge pull request #34 from redBorder/development
+    - [81600e3] Improvement/fix lint (#33)
+    - [a6be77f] Merge pull request #32 from redBorder/development
+  - Miguel Negron
+    - [e1b75f2] Pass lint
+    - [e3047de] Change the way to check if cloud
+    - [34179ba] Add comment to system health
+    - [6ff442c] Update update hosts
+    - [b4a2579] use role instead of reading yml file to know if proxy mode or manager mode
+    - [b4735d1] Bump version
+    - [1766bbe] Change configuration call for GeoIP
+  - nilsver
+    - [81a43e9] fix lint 2.0
+    - [6032735] fix lint
+    - [4ec2a52] fix duplication bug
+    - [3ee8cc4] fix lint
+    - [79f2a23] update hosts file
+    - [5e106a1] Release 0.6.0
+    - [488fa13] Merge pull request #39 from redBorder/feature/18019_add_chronyd_cookbook
+    - [6657481] update format
+    - [d4643f5] fix linter 1.1
+    - [40ee6c8] fix linter
+    - [786c54e] update hosts file
+  - Luis Blanco
+    - [a932601] update changelog migrate view raw
+    - [837ba65] Merge pull request #43 from redBorder/feature/#18237_Add_View_Raw_functionality_in_IPS
+    - [9630389] add clean operation in makefile
+    - [b0adaa8] Merge branch 'master' into feature/#18237_Add_View_Raw_functionality_in_IPS
+    - [68de4a6] update metadata
+    - [4e0ebd2] Merge pull request #38 from redBorder/feature/17731_ips_ssh_version
+    - [ac6f35a] Update system_health.rb
+    - [e73d75f] Revert "remove redBorder user because is legacy"
+    - [48fbb78] Revert "remove redBorder user because is legacy"
+    - [5c3739c] remove redBorder user because is legacy
+    - [a26f1c1] remove redBorder user because is legacy
+    - [e8b73c3] Merge remote-tracking branch 'origin/master' into feature/17731_ips_ssh_version
+    - [ec02f58] Merge pull request #37 from redBorder/development
+  - JPeraltaNic
+    - [196a877] Release 0.7.0
+    - [45fe633] Merge pull request #41 from redBorder/feature/18393_update_hosts_file
+    - [59adf2f] Merge branch 'master' into feature/18393_update_hosts_file
+    - [e03ca54] Merge branch 'master' into feature/#18237_Add_View_Raw_functionality_in_IPS
+  - jnavarrorb
+    - [df69047] MergeFromMaster. Fix user template
+    - [d834784] Merge branch 'master' into feature/#18237_Add_View_Raw_functionality_in_IPS
+    - [2289d8e] Change user to redborder for NG. Fix template folders
+    - [d9c6a39] Change user to redborder for NG. Fix template
+    - [5eff8fd] Change user to redborder for NG
+  - Miguel Álvarez
+    - [4344eeb] Merge pull request #40 from redBorder/development
+    - [28f7dcc] Update metadata.rb
+    - [4c6bd59] Update CHANGELOG.md
+    - [99100a4] Update configure.rb
+    - [8db18ec] Update default.rb
+    - [8bb737e] Update system_health.rb
+    - [76a3d79] Update metadata.rb
+    - [8c34884] Merge branch 'development' into feature/add_clamav
+  - Miguel Alvarez
+    - [d466315] Add chronyd
+    - [35d2ee2] fix lint issues
+    - [8ff38e9] Fix sys health
+    - [5672755] Fix lint
+    - [6d1f480] Fix motd when ssh version
+    - [3b39cfa] Only create ssh user if not cloud registration
+    - [fabdd03] Add rsa pub key
+    - [01a3935] Configure redBorder user
+    - [5832c9a] Fix services
+    - [38ca49a] Fix merge conflicts
+    - [b5c40f8] Add clamAV
+  - Juan Soto
+    - [3a862b1] Update CHANGELOG.md
+    - [faebefc] Update CHANGELOG.md
+    - [942281b] Merge pull request #36 from redBorder/feature/add_clamav
+    - [e7be16c] Merge pull request #35 from redBorder/feature/#17747_rb_exporter
+  - JuanSheba
+    - [f4f19ce] Release 0.4.0
+    - [deddb46] Release 0.4.0
+  - David Vanhoucke
+    - [2bdb85f] fix lint
+    - [0c5d6f6] add exporter service to ips
+  - vimesa
+    - [e8b26a4] Release 0.3.3
+
 ## 0.7.1
 
   - Luis J Blanco Mier
