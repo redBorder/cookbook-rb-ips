@@ -4,16 +4,11 @@ module RbIps
       @rb_init_conf ||= YAML.load_file('/etc/redborder/rb_init_conf.yml')
     end
 
-    def registration_mode
-      load_rb_init_conf['registration_mode']
-    end
-
     def get_setup_ip
       conf = load_rb_init_conf
-      case registration_mode
-      when 'proxy'
+      if node['roles'].include?('ipscp-sensor') 
         conf['cloud_address']
-      when 'manager'
+      else
         conf['webui_host']
       end
     end
@@ -36,7 +31,6 @@ module RbIps
 
     def update_hosts_file
       setup_ip = get_setup_ip
-      reg_mode = registration_mode
       running_services = node['redborder']['systemdservices'].values.flatten if node['redborder']['systemdservices']
       databags = get_external_databag_services
       hosts_hash = read_hosts_file
@@ -74,7 +68,7 @@ module RbIps
           end
 
           # If there is a virtual ip and ips is manager mode
-          if new_ip && reg_mode == 'manager'
+          if new_ip && !node['roles'].include?('ipscp-sensor')
             hosts_hash[new_ip] << "#{new_service}.service"
             hosts_hash[new_ip] << "#{new_service}.#{node['redborder']['cdomain']}"
           else # Add services with setup_ip
