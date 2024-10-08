@@ -1,18 +1,5 @@
 module RbIps
   module Helpers
-    def load_rb_init_conf
-      @rb_init_conf ||= YAML.load_file('/etc/redborder/rb_init_conf.yml')
-    end
-
-    def get_setup_ip
-      conf = load_rb_init_conf
-      if node['roles'].include?('ipscp-sensor') 
-        conf['cloud_address']
-      else
-        conf['webui_host']
-      end
-    end
-
     def get_external_databag_services
       Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/).map { |bag| bag.sub('ipvirtual-external-', '') }
     end
@@ -30,7 +17,10 @@ module RbIps
     end
 
     def update_hosts_file
-      setup_ip = get_setup_ip
+      manager_registration_ip = node['redborder']['manager_registration_ip'] if node['redborder'] && node['redborder']['manager_registration_ip']
+
+      return unless manager_registration_ip
+
       running_services = node['redborder']['systemdservices'].values.flatten if node['redborder']['systemdservices']
       databags = get_external_databag_services
       hosts_hash = read_hosts_file
@@ -44,7 +34,7 @@ module RbIps
         if ip && !ip.empty?
           grouped_virtual_ips[ip] << bag.gsub('ipvirtual-external-', '')
         else
-          grouped_virtual_ips[setup_ip] << bag.gsub('ipvirtual-external-', '')
+          grouped_virtual_ips[manager_registration_ip] << bag.gsub('ipvirtual-external-', '')
         end
       end
 
@@ -68,12 +58,12 @@ module RbIps
           end
 
           # If there is a virtual ip and ips is manager mode
-          if new_ip && !node['roles'].include?('ipscp-sensor')
+          if new_ip && !node['roles'].include?('ipscp-sensor') 
             hosts_hash[new_ip] << "#{new_service}.service"
             hosts_hash[new_ip] << "#{new_service}.#{node['redborder']['cdomain']}"
-          else # Add services with setup_ip
-            hosts_hash[setup_ip] << "#{new_service}.service"
-            hosts_hash[setup_ip] << "#{new_service}.#{node['redborder']['cdomain']}"
+          else # Add services with manager_registration_ip
+            hosts_hash[manager_registration_ip] << "#{new_service}.service"
+            hosts_hash[manager_registration_ip] << "#{new_service}.#{node['redborder']['cdomain']}"
           end
         end
       end
