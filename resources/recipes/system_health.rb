@@ -11,6 +11,10 @@ execute 'restart_barnyard2' do
 end
 
 # Add manager node ip addr to /etc/hosts
+# We need this for the kafka problem
+# Is replaying with manager.domain and
+# The ips need to be able to resolv this
+# TODO: rework this part
 ruby_block 'update_hosts_file_if_needed' do
   block do
     def managerToIp(str)
