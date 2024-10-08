@@ -58,7 +58,7 @@ module RbIps
           end
 
           # If there is a virtual ip and ips is manager mode
-          if new_ip && !node['redborder']['cloud'] 
+          if new_ip && !node['redborder']['cloud']
             hosts_hash[new_ip] << "#{new_service}.service"
             hosts_hash[new_ip] << "#{new_service}.#{node['redborder']['cdomain']}"
           else # Add services with manager_registration_ip
