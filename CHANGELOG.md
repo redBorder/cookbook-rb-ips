@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 1.0.1
+
+  - Miguel Negrón
+    - [575337d] Add pre and postun to clean the cookbook
+
 ## 1.0.0
 
   - Miguel Negrón
@@ -10,7 +15,7 @@ cookbook-rb-ips CHANGELOG
     - [215b2b1] Merge pull request #34 from redBorder/development
     - [81600e3] Improvement/fix lint (#33)
     - [a6be77f] Merge pull request #32 from redBorder/development
-  - Miguel Negron
+  - Miguel Negrón
     - [e1b75f2] Pass lint
     - [e3047de] Change the way to check if cloud
     - [34179ba] Add comment to system health
@@ -133,7 +138,7 @@ cookbook-rb-ips CHANGELOG
 
 ## 0.3.2
 
-  - Miguel Negron
+  - Miguel Negrón
     - [1766bbe] Change configuration call for GeoIP
 
 ## 0.3.1
@@ -164,7 +169,7 @@ cookbook-rb-ips CHANGELOG
 
 ## 0.1.11
 
-  - Miguel Negron
+  - Miguel Negrón
     - [9d042ae] Call rb_get_sensor_rules_cloud.rb using rvm
 
 
@@ -184,5 +189,5 @@ cookbook-rb-ips CHANGELOG
 
 0.0.1
 -----
-- [Miguel Negrón <manegron@redborder.com>]
+- [Miguel Negrón <Miguel Negrón@redborder.com>]
   - Initial release of ips
