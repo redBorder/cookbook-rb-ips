@@ -23,6 +23,9 @@ chmod -R 0755 %{buildroot}/var/chef/cookbooks/rb-ips
 install -D -m 0644 README.md %{buildroot}/var/chef/cookbooks/rb-ips/README.md
 
 %pre
+if [ -d /var/chef/cookbooks/rb-ips ]; then
+    rm -rf /var/chef/cookbooks/rb-ips
+fi
 
 %post
 case "$1" in
@@ -36,6 +39,12 @@ case "$1" in
   ;;
 esac
 
+%postun
+# Deletes directory when uninstall the package
+if [ "$1" = 0 ] && [ -d /var/chef/cookbooks/rb-ips ]; then
+  rm -rf /var/chef/cookbooks/rb-ips
+fi
+
 %files
 %defattr(0755,root,root)
 /var/chef/cookbooks/rb-ips
@@ -45,13 +54,20 @@ esac
 %doc
 
 %changelog
-* Wed Jan 23 2024 David Vanhoucke <dvanhoucke@redborder.com> - 0.1.6
+* Thu Oct 10 2024 Miguel Negrón <manegron@redborder.com>
+- Add pre and postun
+
+* Wed Jan 23 2024 David Vanhoucke <dvanhoucke@redborder.com>
 - Fix redborder-monitor
-* Thu Jan 18 2024 Miguel Negrón <manegron@redborder.com> - 0.1.5
+
+* Thu Jan 18 2024 Miguel Negrón <manegron@redborder.com>
 - Add journalctld configuration
-* Thu Dec 14 2023 Miguel Álvarez <malvarez@redborder.com> - 0.1.4
+
+* Thu Dec 14 2023 Miguel Álvarez <malvarez@redborder.com>
 - Add cgroups
-* Fri Dec 01 2023 David Vanhoucke <dvanhoucke@redborder.com> - 0.1.3
+
+* Fri Dec 01 2023 David Vanhoucke <dvanhoucke@redborder.com>
 - Add selinux
-* Tue Mar 22 2022 Miguel Negron <manegron@redborder.com> - 0.0.1
+
+* Tue Mar 22 2022 Miguel Negron <manegron@redborder.com>
 - Initial release of ips
