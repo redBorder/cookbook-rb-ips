@@ -65,6 +65,7 @@ default['redborder']['services']['barnyard2'] = true
 default['redborder']['services']['clamav'] = true
 default['redborder']['services']['chrony'] = true
 default['redborder']['services']['redborder-exporter'] = true
+default['redborder']['services']['firewall'] = true
 
 default['redborder']['systemdservices']['chef-client'] = ['chef-client']
 default['redborder']['systemdservices']['redborder-monitor'] = ['redborder-monitor']
@@ -74,3 +75,4 @@ default['redborder']['systemdservices']['snortd'] = ['snortd']
 default['redborder']['systemdservices']['barnyard2'] = ['barnyard2']
 default['redborder']['systemdservices']['redborder-exporter'] = ['rb-exporter']
 default['redborder']['systemdservices']['chrony'] = ['chronyd']
+default['redborder']['systemdservices']['firewall'] = ['firewalld']
