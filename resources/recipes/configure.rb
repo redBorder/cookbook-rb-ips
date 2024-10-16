@@ -222,6 +222,7 @@ template '/etc/sensor_id' do
 end
 
 geoip_config 'Configure GeoIP' do
+  license_key node['redborder']['geoip_key']
   action :add
 end
 
