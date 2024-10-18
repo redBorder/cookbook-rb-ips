@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 1.1.0
+
+  - Miguel Negron
+    - [0fbc4cc] Fix name redborder-monitor instead of rb-monitor in sudoers file
+
 ## 1.0.1
 
   - Miguel Negrón
