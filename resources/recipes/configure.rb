@@ -44,6 +44,14 @@ rb_selinux_config 'Configure Selinux' do
   end
 end
 
+rb_firewall_config 'Configure Firewall' do
+  if ips_services['firewall']
+    action :add
+  else
+    action :remove
+  end
+end
+
 node.normal['redborder']['chef_client_interval'] = 300
 
 directory '/etc/snortpcaps' do
