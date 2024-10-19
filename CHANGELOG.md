@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.0.0
+
+  - Miguel Negrón
+    - [4193508] Merge pull request #52 from redBorder/improvement/#18961_service_list_without_chef
+
 ## 1.2.0
 
   - Miguel Negrón
