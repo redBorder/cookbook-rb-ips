@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 1.2.0
+
+  - Miguel Negrón
+    - [639edd5] Merge pull request #48 from redBorder/bugfix/#18863_license_in_settings
+
 ## 1.1.0
 
   - Miguel Negron
