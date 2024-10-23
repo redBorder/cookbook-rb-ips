@@ -6,6 +6,8 @@ default['redborder']['cdomain'] = 'redborder.cluster'
 default['redborder']['organization_uuid'] = nil
 default['redborder']['organizations'] = []
 default['redborder']['locations'] = %w(namespace namespace_uuid organization organization_uuid service_provider service_provider_uuid deployment deployment_uuid market market_uuid campus campus_uuid building building_uuid floor floor_uuid)
+default['redborder']['repo'] = {}
+default['redborder']['repo']['version'] = nil
 
 default['redborder']['ips']['insecure'] = true
 
