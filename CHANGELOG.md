@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.1.0
+
+  - manegron
+    - [3139c4c] Update attributes
+
 ## 2.0.0
 
   - Miguel Negrón
