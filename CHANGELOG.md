@@ -1,6 +1,13 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.1.1
+
+  - ptorresred
+    - [dbd4122] Merge pull request #55 from redBorder/bugfix/19105_sendmail_CPU_overload
+  - Daniel Castro
+    - [782a895] stop sending mails for failed sudo commands and add wildcard for arguments in rb_get_sensor.sh commands
+
 ## 2.1.0
 
   - manegron
