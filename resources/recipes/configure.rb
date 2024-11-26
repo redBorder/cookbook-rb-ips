@@ -230,6 +230,8 @@ template '/etc/sensor_id' do
 end
 
 geoip_config 'Configure GeoIP' do
+  user_id node['redborder']['geoip_user']
+  license_key node['redborder']['geoip_key']
   action :add
 end
 
@@ -469,7 +471,7 @@ rbcgroup_config 'Configure cgroups' do
 end
 
 rb_clamav_config 'Configure ClamAV' do
-  action(ips_services['clamav'] ? :add : :remove)
+  action :add
 end
 
 rb_chrony_config 'Configure Chrony' do

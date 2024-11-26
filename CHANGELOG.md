@@ -1,6 +1,33 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.1.1
+
+  - ptorresred
+    - [dbd4122] Merge pull request #55 from redBorder/bugfix/19105_sendmail_CPU_overload
+  - Daniel Castro
+    - [782a895] stop sending mails for failed sudo commands and add wildcard for arguments in rb_get_sensor.sh commands
+
+## 2.1.0
+
+  - manegron
+    - [3139c4c] Update attributes
+
+## 2.0.0
+
+  - Miguel Negrón
+    - [4193508] Merge pull request #52 from redBorder/improvement/#18961_service_list_without_chef
+
+## 1.2.0
+
+  - Miguel Negrón
+    - [639edd5] Merge pull request #48 from redBorder/bugfix/#18863_license_in_settings
+
+## 1.1.0
+
+  - Miguel Negron
+    - [0fbc4cc] Fix name redborder-monitor instead of rb-monitor in sudoers file
+
 ## 1.0.1
 
   - Miguel Negrón
