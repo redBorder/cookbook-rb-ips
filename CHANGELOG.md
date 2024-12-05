@@ -1,6 +1,19 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.2.0
+
+  - Luis Blanco
+    - [59caf92] Merge pull request #49 from redBorder/feature/18893_integrate_firewall_cookbook
+    - [8713033] Merge branch 'development' into feature/18893_integrate_firewall_cookbook
+  - ptorresred
+    - [05869b9] Version 2.1.1
+    - [dbd4122] Merge pull request #55 from redBorder/bugfix/19105_sendmail_CPU_overload
+  - Daniel Castro
+    - [782a895] stop sending mails for failed sudo commands and add wildcard for arguments in rb_get_sensor.sh commands
+  - nilsver
+    - [2681d66] add firewall cookbook
+
 ## 2.1.1
 
   - ptorresred
