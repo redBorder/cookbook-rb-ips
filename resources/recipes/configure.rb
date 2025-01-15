@@ -160,7 +160,6 @@ rescue
   ssh_secrets = {}
 end
 
-
 # ssh user for webui execute commands on
 execute 'create_user_redBorder' do
   command 'sudo useradd -m -s /bin/bash redborder'
