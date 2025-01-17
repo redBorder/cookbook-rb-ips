@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.2.1
+
+  - Miguel Negrón
+    - [4879977] Create redborder user and key in cloud mode
+
 ## 2.2.0
 
   - Luis Blanco
