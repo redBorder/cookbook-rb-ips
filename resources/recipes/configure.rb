@@ -160,33 +160,32 @@ rescue
   ssh_secrets = {}
 end
 
-unless node['redborder']['cloud']
-  # ssh user for webui execute commands on
-  execute 'create_user_redBorder' do
-    command 'sudo useradd -m -s /bin/bash redborder'
-    not_if 'getent passwd redborder'
-  end
+# ssh user for webui execute commands on
+execute 'create_user_redBorder' do
+  command 'sudo useradd -m -s /bin/bash redborder'
+  not_if 'getent passwd redborder'
+end
 
-  directory '/home/redborder/.ssh' do
+directory '/home/redborder/.ssh' do
+  owner 'redborder'
+  group 'redborder'
+  mode '0755'
+  action :create
+end
+
+unless ssh_secrets.empty? || ssh_secrets['public_rsa'].nil?
+  template '/home/redborder/.ssh/authorized_keys' do
+    source 'rsa.pub.erb'
     owner 'redborder'
     group 'redborder'
-    mode '0755'
+    mode '0600'
+    variables(
+      public_rsa: ssh_secrets['public_rsa']
+    )
     action :create
   end
-
-  unless ssh_secrets.empty? || ssh_secrets['public_rsa'].nil?
-    template '/home/redborder/.ssh/authorized_keys' do
-      source 'rsa.pub.erb'
-      owner 'redborder'
-      group 'redborder'
-      mode '0600'
-      variables(
-        public_rsa: ssh_secrets['public_rsa']
-      )
-      action :create
-    end
-  end
 end
+
 # template "/opt/rb/etc/sysconfig/iptables" do
 #   source "iptables.erb"
 #   owner "root"
