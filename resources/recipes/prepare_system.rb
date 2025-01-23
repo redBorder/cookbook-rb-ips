@@ -65,7 +65,7 @@ sysmem_total = (node['memory']['total'].to_i * 0.90).to_i
 memory_services(sysmem_total)
 
 # Build service list for rbcli
-if !File.exist?('/etc/redborder/services.json')
+unless File.exist?('/etc/redborder/services.json')
   services = node['redborder']['services'] || []
   systemd_services = node['redborder']['systemdservices'] || []
   service_enablement = {}
