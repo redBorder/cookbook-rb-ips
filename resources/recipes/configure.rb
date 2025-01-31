@@ -240,7 +240,7 @@ snmp_config 'Configure snmp' do
   if ips_services['snmp']
     action :add
   else
-    actopm :remove
+    action :remove
   end
 end
 
@@ -338,7 +338,7 @@ rbmonitor_config 'Configure redborder-monitor' do
   if ips_services['redborder-monitor'] && sensor_id > 0
     action :add
   else
-    actio :remove
+    action :remove
   end
 end
 
