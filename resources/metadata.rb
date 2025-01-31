@@ -5,7 +5,7 @@ maintainer       'Eneo Tecnología S.L.'
 maintainer_email 'git@redborder.com'
 license          'AGPL-3.0'
 description      'Installs/Configures redborder ips'
-version          '2.2.1'
+version          '2.2.2'
 
 depends 'rb-common'
 depends 'geoip'
