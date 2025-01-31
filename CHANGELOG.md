@@ -1,6 +1,12 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.2.2
+
+  - nilsver
+    - [4a8433c] rubocop made me do this
+    - [28d2aa1] fix rbcli service in proxy/ips
+
 ## 2.2.1
 
   - Miguel Negrón
