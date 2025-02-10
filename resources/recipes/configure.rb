@@ -569,9 +569,9 @@ end
 ruby_block 'update_knife_rb' do
   block do
     knife_rb_path = '/root/.chef/knife.rb'
-    env_setting = "environment '#{node.chef_environment}'"
+    if node.chef_environment && File.exist?(knife_rb_path)
+      env_setting = "environment '#{node.chef_environment}'"
 
-    if File.exist?(knife_rb_path)
       file_content = File.read(knife_rb_path)
       if file_content.match(/^environment\s+".+"/)
         new_content = file_content.gsub(/^environment\s+".+"/, env_setting)
