@@ -573,11 +573,11 @@ ruby_block 'update_knife_rb' do
       env_setting = "environment '#{node.chef_environment}'"
 
       file_content = File.read(knife_rb_path)
-      if file_content.match(/^environment\s+".+"/)
-        new_content = file_content.gsub(/^environment\s+".+"/, env_setting)
-      else
-        new_content = file_content + "\n" + env_setting
-      end
+      new_content = if file_content.match(/\n*environment\s+'.+'/)
+                      file_content.gsub(/environment\s+'.+'/, env_setting)
+                    else
+                      "#{file_content}\n#{env_setting}"
+                    end
       File.write(knife_rb_path, new_content)
     end
   end
