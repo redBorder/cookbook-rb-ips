@@ -1,7 +1,5 @@
 module RbIps
   module Helpers
-    require 'resolv'
-
     def get_external_databag_services
       Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/).map { |bag| bag.sub('ipvirtual-external-', '') }
     end
