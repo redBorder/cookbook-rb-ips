@@ -17,18 +17,7 @@ end
 # TODO: rework this part
 ruby_block 'update_hosts_file_if_needed' do
   block do
-    def managerToIp(str)
-      ipv4_regex = /\A(\d{1,3}\.){3}\d{1,3}\z/
-      ipv6_regex = /\A(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}\z/
-      dns_regex = /\A[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/
-
-      return str if str =~ ipv4_regex || str =~ ipv6_regex
-
-      if str =~ dns_regex
-        ip = `dig +short #{str}`.strip
-        return ip unless ip.empty?
-      end
-    end
+    extend RbIps::Helpers
 
     unless node['redborder']['cloud']
       # Read webui_host from the rb_init_conf.yml file

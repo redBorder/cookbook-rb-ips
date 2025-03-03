@@ -1,5 +1,7 @@
 module RbIps
   module Helpers
+    require 'resolv'
+
     def get_external_databag_services
       Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/).map { |bag| bag.sub('ipvirtual-external-', '') }
     end
@@ -17,8 +19,7 @@ module RbIps
     end
 
     def update_hosts_file
-      manager_registration_ip = node['redborder']['manager_registration_ip'] if node['redborder'] && node['redborder']['manager_registration_ip']
-
+      manager_registration_ip = managerToIp(node['redborder']['manager_registration_ip']) if node['redborder'] && node['redborder']['manager_registration_ip']
       return unless manager_registration_ip
 
       running_services = node['redborder']['systemdservices'].values.flatten if node['redborder']['systemdservices']
@@ -75,6 +76,19 @@ module RbIps
         hosts_entries << format_entry unless services.empty?
       end
       hosts_entries
+    end
+
+    def managerToIp(str)
+      ipv4_regex = /\A(\d{1,3}\.){3}\d{1,3}\z/
+      ipv6_regex = /\A(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}\z/
+      dns_regex = /\A[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/
+
+      return str if str =~ ipv4_regex || str =~ ipv6_regex
+
+      if str =~ dns_regex
+        ip = `dig +short #{str}`.strip
+        return ip unless ip.empty?
+      end
     end
   end
 end
