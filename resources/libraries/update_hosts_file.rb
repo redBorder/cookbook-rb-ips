@@ -1,5 +1,7 @@
 module RbIps
   module Helpers
+    require 'resolv'
+
     def get_external_databag_services
       Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/).map { |bag| bag.sub('ipvirtual-external-', '') }
     end
@@ -17,9 +19,15 @@ module RbIps
     end
 
     def update_hosts_file
-      manager_registration_ip = node['redborder']['manager_registration_ip'] if node['redborder'] && node['redborder']['manager_registration_ip']
-
-      return unless manager_registration_ip
+      unless node.dig('redborder', 'resolve_host')
+        domain_name = node.dig('redborder', 'manager_registration_ip')
+        return if domain_name.nil?
+        resolved_ip = manager_to_ip(domain_name)
+        return if resolved_ip.nil?
+        node.normal['redborder']['resolve_host'] = resolved_ip
+      end
+      manager_registration_ip = node.dig('redborder', 'resolve_host')
+      # Up until here, we resolved and stored the ip for /etc/hosts only if necessary
 
       running_services = node['redborder']['systemdservices'].values.flatten if node['redborder']['systemdservices']
       databags = get_external_databag_services
@@ -75,6 +83,17 @@ module RbIps
         hosts_entries << format_entry unless services.empty?
       end
       hosts_entries
+    end
+
+    def manager_to_ip(str)
+      ipv4_regex = /\A(\d{1,3}\.){3}\d{1,3}\z/
+      ipv6_regex = /\A(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}\z/
+      dns_regex  = /\A[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/
+
+      return str if str.match?(ipv4_regex) || str.match?(ipv6_regex)
+      return Resolv.getaddress(str).to_s if str.match?(dns_regex)
+
+      nil
     end
   end
 end
