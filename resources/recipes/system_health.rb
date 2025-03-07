@@ -22,7 +22,7 @@ ruby_block 'update_hosts_file_if_needed' do
     unless node['redborder']['cloud']
       # Read webui_host from the rb_init_conf.yml file
       webui_host_command = "grep '^webui_host:' /etc/redborder/rb_init_conf.yml | awk '{print $2}'"
-      webui_host = managerToIp `#{webui_host_command}`.strip
+      webui_host = manager_to_ip `#{webui_host_command}`.strip
 
       # Search for a node matching the webui_host IP address
       matching_node_name = search(:node, "ipaddress:#{webui_host}").first&.name
