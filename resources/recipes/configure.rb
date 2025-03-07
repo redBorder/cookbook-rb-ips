@@ -565,3 +565,21 @@ if File.exist?('/etc/init.d/rb-lcd')
     action :nothing
   end.run_action(:run)
 end
+
+ruby_block 'update_knife_rb' do
+  block do
+    knife_rb_path = '/root/.chef/knife.rb'
+    if node.chef_environment && File.exist?(knife_rb_path)
+      env_setting = "environment '#{node.chef_environment}'"
+
+      file_content = File.read(knife_rb_path)
+      new_content = if file_content.match(/\n*environment\s+'.+'/)
+                      file_content.gsub(/environment\s+'.+'/, env_setting)
+                    else
+                      "#{file_content}\n#{env_setting}"
+                    end
+      File.write(knife_rb_path, new_content)
+    end
+  end
+  action :run
+end
