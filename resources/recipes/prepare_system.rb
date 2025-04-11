@@ -45,11 +45,7 @@ else
 end
 
 # get cdomain
-if File.exist?('/etc/redborder/cdomain')
-  node.default['redborder']['cdomain'] = File.read('/etc/redborder/cdomain').chomp
-else
-  node.default['redborder']['cdomain'] = 'redborder.cluster'
-end
+node.default['redborder']['cdomain'] = File.exist?('/etc/redborder/cdomain') ? File.read('/etc/redborder/cdomain').chomp : 'redborder.cluster'
 
 # get sensors info
 node.run_state['sensors_info'] = get_sensors_info()
