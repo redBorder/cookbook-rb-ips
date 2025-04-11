@@ -36,6 +36,17 @@ case "$1" in
   2)
     # This is an upgrade.
     su - -s /bin/bash -c 'source /etc/profile && rvm gemset use default && env knife cookbook upload rb-ips'
+
+    CDOMAIN_FILE="/etc/redborder/cdomain"
+    if [ -f "$CDOMAIN_FILE" ]; then
+      SUFFIX=$(cat "$CDOMAIN_FILE")
+    else
+      SUFFIX="redborder.cluster"
+    fi
+
+    NEW_DOMAIN="http2k.${SUFFIX}"
+
+    sed -i -E "s/\bhttp2k\.service\b/${NEW_DOMAIN}/" /etc/hosts
   ;;
 esac
 
