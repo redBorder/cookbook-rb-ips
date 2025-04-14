@@ -1,6 +1,12 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.3.0
+
+  - nilsver
+    - [5596788] add check for file
+    - [21302b8] add cdomain to node
+
 ## 2.2.2
 
   - nilsver
