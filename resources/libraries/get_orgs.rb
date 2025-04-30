@@ -9,6 +9,11 @@ module RbIps
 
         organizations << m
       end
+      organizations.each do |org|
+        if org.override_attributes && org.override_attributes['redborder'] && org.override_attributes['redborder']['megabytes_limit'].is_a?(String) && org.override_attributes['redborder']['megabytes_limit'].strip.empty?
+          org.override_attributes['redborder']['megabytes_limit'] = nil
+        end
+      end
       organizations
     end
   end

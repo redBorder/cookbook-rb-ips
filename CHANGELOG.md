@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.3.1
+
+  - jnavarrorb
+    - [e534d5a] Fix empty string
+
 ## 2.3.0
 
   - nilsver
