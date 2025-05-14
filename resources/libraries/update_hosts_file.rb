@@ -18,6 +18,15 @@ module RbIps
       hosts_hash
     end
 
+    def manager_node_names
+      query = Chef::Search::Query.new
+      node_names = []
+      query.search(:node, 'is_manager:true') do |node|
+        node_names << "#{node.name}.node"
+      end
+      node_names
+    end
+
     def update_hosts_file
       unless node.dig('redborder', 'resolve_host')
         domain_name = node.dig('redborder', 'manager_registration_ip')
@@ -70,11 +79,14 @@ module RbIps
             hosts_hash[new_ip] << "#{new_service}.service"
             hosts_hash[new_ip] << "#{new_service}.#{node['redborder']['cdomain']}"
           else # Add services with manager_registration_ip
-            hosts_hash[manager_registration_ip] << "#{new_service}.service"
+            hosts_hash[manager_registration_ip] << "#{new_service}.service" #kafka.service
             hosts_hash[manager_registration_ip] << "#{new_service}.#{node['redborder']['cdomain']}"
           end
         end
       end
+
+      # merge services of manager IP with manager node names
+      hosts_hash[manager_registration_ip] = (hosts_hash[manager_registration_ip] || []) + manager_node_names
 
       # Prepare the lines for the hosts file
       hosts_entries = []
