@@ -1,0 +1,5 @@
+# .rubocop.yml
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
