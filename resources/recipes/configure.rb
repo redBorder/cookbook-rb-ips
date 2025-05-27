@@ -52,7 +52,7 @@ rb_firewall_config 'Configure Firewall' do
   end
 end
 
-node.default['redborder']['chef_client_interval'] = 300
+node.normal['redborder']['chef_client_interval'] = 300
 
 directory '/etc/snortpcaps' do
   owner 'root'
@@ -334,7 +334,7 @@ if node['redborder']['chef_enabled'].nil? || node['redborder']['chef_enabled']
 end
 
 rbmonitor_config 'Configure redborder-monitor' do
-  service_name node['hostname']
+  name node['hostname']
   if ips_services['redborder-monitor'] && sensor_id > 0
     action :add
   else
@@ -407,7 +407,7 @@ if node['redborder']['ipsrules'] && node['redborder']['cloud']
 
     ruby_block "update_rule_timestamp_#{groupid}" do
       block do
-        node.override['redborder']['ipsrules'][groupid]['timestamp_last'] = node['redborder']['ipsrules'][groupid]['timestamp']
+        node.normal['redborder']['ipsrules'][groupid]['timestamp_last'] = node['redborder']['ipsrules'][groupid]['timestamp']
       end
       action :nothing
     end
@@ -560,7 +560,7 @@ if File.exist?('/etc/init.d/rb-lcd')
   execute 'rb-lcd' do
     lcd = !Dir.glob('/dev/ttyUSB*').empty?
     only_if "#{lcd}"
-    command 'service rb-lcd start'
+    command '/bin/env WAIT=1 /etc/init.d/rb-lcd start'
     ignore_failure true
     action :nothing
   end.run_action(:run)
