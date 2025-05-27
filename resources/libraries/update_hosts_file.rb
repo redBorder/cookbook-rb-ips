@@ -79,7 +79,7 @@ module RbIps
             hosts_hash[new_ip] << "#{new_service}.service"
             hosts_hash[new_ip] << "#{new_service}.#{node['redborder']['cdomain']}"
           else # Add services with manager_registration_ip
-            hosts_hash[manager_registration_ip] << "#{new_service}.service" #kafka.service
+            hosts_hash[manager_registration_ip] << "#{new_service}.service"
             hosts_hash[manager_registration_ip] << "#{new_service}.#{node['redborder']['cdomain']}"
           end
         end
