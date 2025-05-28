@@ -6,6 +6,7 @@
 def format_ip_row(hash)
   hash = hash.sort.to_h
   hash.map do |ip, names|
+    names = names.reject(&:nil?) # Sometimes hosts hash has nil values to be removed
     format('%-18s%s', ip, names.join(' '))  
   end.join("\n")
 end
