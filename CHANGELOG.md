@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.3.2
+
+  - nilsver
+    - [499881d] add check every 24h to clean metadata
+
 ## 2.3.1
 
   - jnavarrorb
