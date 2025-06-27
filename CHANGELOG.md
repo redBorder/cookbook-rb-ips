@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.3.2
+
+  - nilsver
+    - [910b9f7] remove flush cache
+
 ## 2.3.1
 
   - jnavarrorb

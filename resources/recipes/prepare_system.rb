@@ -5,11 +5,6 @@
 
 extend RbIps::Helpers
 
-# Clean metadata to get packages upgrades
-execute 'Clean yum metadata' do
-  command 'yum clean metadata'
-end
-
 # Stop rb-register
 if File.exist?('/etc/redborder/sensor-installed.txt')
   service 'rb-register' do
@@ -20,7 +15,6 @@ end
 
 # Configure and enable chef-client
 dnf_package 'redborder-chef-client' do
-  flush_cache [:before]
   action :upgrade
 end
 

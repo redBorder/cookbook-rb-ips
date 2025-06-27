@@ -357,7 +357,6 @@ end
 
 dnf_package 'watchdog' do
   action :upgrade
-  flush_cache [:before]
 end
 
 template '/etc/watchdog.conf' do
@@ -430,7 +429,6 @@ end
 
 dnf_package 'bp_watchdog' do
   action :upgrade
-  flush_cache [:before]
 end
 
 service 'bp_watchdog' do
