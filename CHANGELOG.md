@@ -4,7 +4,7 @@ cookbook-rb-ips CHANGELOG
 ## 2.3.2
 
   - nilsver
-    - [499881d] add check every 24h to clean metadata
+    - [910b9f7] remove flush cache
 
 ## 2.3.1
 

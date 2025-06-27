@@ -5,12 +5,6 @@
 
 extend RbIps::Helpers
 
-# clean metadata to get packages upgrades, every 24h
-execute 'Clean dnf metadata' do
-  command 'dnf clean metadata && touch /var/cache/dnf/last_makecache'
-  only_if '[ -f /var/cache/dnf/last_makecache ] && [ "$(find /var/cache/dnf/last_makecache -mmin +1440)" ]'
-end
-
 # Stop rb-register
 if File.exist?('/etc/redborder/sensor-installed.txt')
   service 'rb-register' do
