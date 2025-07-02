@@ -50,7 +50,7 @@ module RbIps
     def add_manager_services_info(hosts_info, manager_registration_ip, cdomain)
       # This services are critical for the use of chef to rewrite the hosts file
       implicit_services = ['erchef.service', 's3.service']
-      implicit_services << "erchef.#{cdomain}" if cdomain
+      implicit_services << "erchef.service.#{cdomain}" if cdomain
       # Services not contained in node information
       other_services = if cdomain
                          %w[data http2k rbookshelf.s3].map { |s| "#{s}.#{cdomain}" }
