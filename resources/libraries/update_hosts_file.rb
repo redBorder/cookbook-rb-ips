@@ -93,7 +93,14 @@ module RbIps
     end
 
     def gather_hosts_info
-      manager_registration_ip = node.dig('redborder', 'manager_registration_ip')
+      unless node.dig('redborder', 'resolve_host')
+        domain_name = node.dig('redborder', 'manager_registration_ip')
+        return {} if domain_name.nil?
+        resolved_ip = manager_to_ip(domain_name)
+        return {} if resolved_ip.nil?
+        node.normal['redborder']['resolve_host'] = resolved_ip
+      end
+      manager_registration_ip = node.dig('redborder', 'resolve_host')
       return {} unless manager_registration_ip
 
       cdomain = node.dig('redborder', 'cdomain')
@@ -103,17 +110,6 @@ module RbIps
       hosts_info = add_manager_names_info(hosts_info, manager_registration_ip, cdomain)
       hosts_info = add_manager_services_info(hosts_info, manager_registration_ip, cdomain)
       add_virtual_ips_info(hosts_info, manager_registration_ip, cdomain) # returns hosts_info
-    end
-
-    def manager_to_ip(str)
-      ipv4_regex = /\A(\d{1,3}\.){3}\d{1,3}\z/
-      ipv6_regex = /\A(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}\z/
-      dns_regex  = /\A[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/
-
-      return str if str.match?(ipv4_regex) || str.match?(ipv6_regex)
-      return Resolv.getaddress(str).to_s if str.match?(dns_regex)
-
-      nil
     end
   end
 end
