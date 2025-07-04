@@ -3,7 +3,10 @@ module RbIps
     require 'resolv'
 
     def external_databag_services
-      Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/).map { |bag| bag.sub('ipvirtual-external-', '') }
+      external_databag = Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/)
+      services = external_databag.map { |bag| bag.sub('ipvirtual-external-', '') }
+      services -= %w[sfacctd] # not visible for ips
+      services
     end
 
     def read_hosts_file
