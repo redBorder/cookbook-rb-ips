@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.3.3
+
+  - jnavarrorb
+    - [11eb051] Remove executable permissions on non-executable files
+
 ## 2.3.2
 
   - nilsver
