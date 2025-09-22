@@ -27,6 +27,12 @@ ips_services = ips_services()
 # end
 
 begin
+  s3_malware_secrets = data_bag_item('rBglobal', 'malware-bucket')
+rescue
+  s3_malware_secrets = {}
+end
+
+begin
   sensor_id = node['redborder']['sensor_id'].to_i
 rescue
   sensor_id = 0
@@ -264,6 +270,7 @@ if node['redborder']['chef_enabled'].nil? || node['redborder']['chef_enabled']
     sensor_id sensor_id
     groups groups_in_use
     if ips_services['snortd'] && !node['redborder']['snort']['groups'].empty? && sensor_id > 0 && node['redborder']['segments'] && node['cpu'] && node['cpu']['total']
+      s3_malware_secrets s3_malware_secrets
       action :add
     else
       action :remove
