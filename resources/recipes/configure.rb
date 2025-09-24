@@ -27,7 +27,7 @@ ips_services = ips_services()
 # end
 
 begin
-  s3_malware_secrets = data_bag_item('rBglobal', 'malware-bucket')
+  s3_malware_secrets = data_bag_item('rBglobal', 'malware-bucket').to_hash
 rescue
   s3_malware_secrets = {}
 end
