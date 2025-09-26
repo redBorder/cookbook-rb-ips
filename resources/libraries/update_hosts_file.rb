@@ -5,7 +5,7 @@ module RbIps
     def get_external_databag_services
       external_databag = Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/)
       services = external_databag.map { |bag| bag.sub('ipvirtual-external-', '') }
-      services -= %w[sfacctd] # not visible for ips
+      services -= ['sfacctd'] # not visible for ips
       services
     end
 
@@ -59,7 +59,7 @@ module RbIps
       end
       # Services not contained in node information
       other_services = if cdomain
-                         %w[data http2k rbookshelf.s3].map { |s| "#{s}.#{cdomain}" }
+                         ['data', 'http2k', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" }
                        else
                          []
                        end
