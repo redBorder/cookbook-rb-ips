@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-unified_mode true
-
 name             'rb-ips'
 maintainer       'Eneo Tecnología S.L.'
 maintainer_email 'git@redborder.com'

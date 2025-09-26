@@ -1,8 +1,0 @@
-# .rubocop.yml
-
-AllCops:
-  TargetRubyVersion: 2.7
-
-Style/PercentLiteralDelimiters:
-  Enabled: false
-
