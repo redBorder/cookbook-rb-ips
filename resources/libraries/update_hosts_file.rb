@@ -3,7 +3,15 @@ module RbIps
     require 'resolv'
 
     def get_external_databag_services
+      # This function turned too complex ...
+      # external_databag = Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/)
+      # services = external_databag.map { |bag| bag.sub('ipvirtual-external-', '') }
+      # services -= %w[sfacctd nginx] # not visible for ips
+      # services += ['webui'] # nginx is not visible for ips, while webui is redirected to nginx on the manager
+      # services
 
+      # ... so we hardcode the list of services for now
+      %w[f2k kafka webui]
     end
 
     def read_hosts_file
