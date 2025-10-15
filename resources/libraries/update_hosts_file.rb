@@ -2,16 +2,29 @@ module RbIps
   module Helpers
     require 'resolv'
 
-    def get_external_databag_services
+    def external_databag_services
       # This function turned too complex ...
-      # external_databag = Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/)
-      # services = external_databag.map { |bag| bag.sub('ipvirtual-external-', '') }
-      # services -= %w[sfacctd nginx] # not visible for ips
-      # services += ['webui'] # nginx is not visible for ips, while webui is redirected to nginx on the manager
-      # services
+      external_databag = Chef::DataBag.load('rBglobal').keys.grep(/^ipvirtual-external-/)
+      services = external_databag.map { |bag| bag.sub('ipvirtual-external-', '') }
+      services -= %w(sfacctd) # Excluded for IPS
+      services
+    end
 
-      # ... so we hardcode the list of services for now
-      %w(f2k kafka webui)
+    NGINX_SERVICES = %w(webui) # Only those visible for IPS. Manager will recognize these services as nginx
+
+    def grouped_virtual_ips(manager_registration_ip)
+      # Hash where services (from databag) are grouped by ip
+      grouped_virtual_ips = Hash.new { |h, k| h[k] = [] }
+
+      external_databag_services.each do |bag|
+        data = data_bag_item('rBglobal', "ipvirtual-external-#{bag}")
+        ip = data['ip'].presence || manager_registration_ip
+        service_name = bag.delete_prefix('ipvirtual-external-')
+
+        services = (service_name == 'nginx') ? NGINX_SERVICES : [service_name]
+        grouped_virtual_ips[ip] |= services
+      end
+      grouped_virtual_ips
     end
 
     def read_hosts_file
@@ -73,18 +86,8 @@ module RbIps
     end
 
     def add_virtual_ips_info(hosts_info, manager_registration_ip, cdomain)
-      # Hash where services (from databag) are grouped by ip
-      grouped_virtual_ips = Hash.new { |hash, key| hash[key] = [] }
-      get_external_databag_services.each do |bag|
-        virtual_dg = data_bag_item('rBglobal', "ipvirtual-external-#{bag}")
-        ip = virtual_dg['ip']
-        ip = ip && !ip.empty? ? ip : manager_registration_ip
-        grouped_virtual_ips[ip] << bag.gsub('ipvirtual-external-', '')
-      end
-
       is_mode_manager = !node['redborder']['cloud']
-      grouped_virtual_ips.each do |ip, services|
-        services.uniq! # Avoids having duplicate services in the list
+      grouped_virtual_ips(manager_registration_ip).each do |ip, services|
         services.each do |service|
           # Add running services to localhost
           next if ip == '127.0.0.1'
