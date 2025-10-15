@@ -13,7 +13,9 @@ module RbIps
     def grouped_virtual_ips(manager_registration_ip)
       # Hash where services (from databag) are grouped by ip
       grouped_virtual_ips = Hash.new { |_ip, services| h[services] = [] }
-      nginx_services = %w(erchef http2k s3 webui)  # Only those visible for IPS. Manager will recognize these services as nginx
+      # Only those visible for IPS. Manager will recognize these services as nginx
+      # But erchef and s3 are necessary to access VIPs, so moved to implicit
+      nginx_services = %w(http2k webui)
 
       external_databag_services.each do |bag|
         data = data_bag_item('rBglobal', "ipvirtual-external-#{bag}")
@@ -69,12 +71,19 @@ module RbIps
 
     def add_manager_services_info(hosts_info, manager_registration_ip, cdomain)
       # Services not contained in node information
+      implicit_services = %w(
+        erchef.service
+        erchef.service.#{cdomain}
+        s3.service
+        s3.service.#{cdomain}
+      )
+
       other_services = if cdomain
                          ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" }
                        else
                          []
                        end
-      hosts_info[manager_registration_ip]['services'] = other_services
+      hosts_info[manager_registration_ip]['services'] = implicit_services + other_services
       hosts_info
     end
 
