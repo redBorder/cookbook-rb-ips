@@ -65,7 +65,7 @@ module RbIps
       intrusion_node_name = "#{node.name}.node"
       node_names = manager_node_names << intrusion_node_name # append
       hosts_info[manager_registration_ip]['node_names'] = node_names
-      hosts_info[manager_registration_ip]['cdomain'] = cdomain if cdomain
+      hosts_info[manager_registration_ip]['cdomain'] = cdomain
       hosts_info
     end
 
@@ -78,11 +78,7 @@ module RbIps
         "s3.service.#{cdomain}",
       ]
 
-      other_services = if cdomain
-                         ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" }
-                       else
-                         []
-                       end
+      other_services = ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" } # On deprecation
       hosts_info[manager_registration_ip]['services'] = implicit_services + other_services
       hosts_info
     end
