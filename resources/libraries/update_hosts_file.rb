@@ -12,7 +12,7 @@ module RbIps
 
     def grouped_virtual_ips(manager_registration_ip)
       # Hash where services (from databag) are grouped by ip
-      grouped_virtual_ips = Hash.new { |_ip, services| h[services] = [] }
+      grouped_virtual_ips = Hash.new { |ip, services| ip[services] = [] }
       # Only those visible for IPS. Manager will recognize these services as nginx
       # But erchef and s3 are necessary to access VIPs, so moved to implicit
       nginx_services = %w(http2k webui)
