@@ -71,12 +71,12 @@ module RbIps
 
     def add_manager_services_info(hosts_info, manager_registration_ip, cdomain)
       # Services not contained in node information
-      implicit_services = %w(
-        erchef.service
-        erchef.service.#{cdomain}
-        s3.service
-        s3.service.#{cdomain}
-      )
+      implicit_services = [
+        'erchef.service',
+        "erchef.service.#{cdomain}",
+        's3.service',
+        "s3.service.#{cdomain}"
+      ]
 
       other_services = if cdomain
                          ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" }
