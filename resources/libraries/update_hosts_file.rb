@@ -10,18 +10,17 @@ module RbIps
       services
     end
 
-    NGINX_SERVICES = %w(webui) # Only those visible for IPS. Manager will recognize these services as nginx
-
     def grouped_virtual_ips(manager_registration_ip)
       # Hash where services (from databag) are grouped by ip
-      grouped_virtual_ips = Hash.new { |h, k| h[k] = [] }
+      grouped_virtual_ips = Hash.new { |_ip, services| h[services] = [] }
+      nginx_services = %w(erchef http2k s3 webui)  # Only those visible for IPS. Manager will recognize these services as nginx
 
       external_databag_services.each do |bag|
         data = data_bag_item('rBglobal', "ipvirtual-external-#{bag}")
         ip = data['ip'] || manager_registration_ip
         service_name = bag.delete_prefix('ipvirtual-external-')
 
-        services = (service_name == 'nginx') ? NGINX_SERVICES : [service_name]
+        services = service_name == 'nginx' ? nginx_services : [service_name]
         grouped_virtual_ips[ip] |= services
       end
       grouped_virtual_ips
@@ -69,19 +68,13 @@ module RbIps
     end
 
     def add_manager_services_info(hosts_info, manager_registration_ip, cdomain)
-      # This services are critical for the use of chef to rewrite the hosts file
-      implicit_services = ['erchef.service']
-      if cdomain
-        implicit_services << "erchef.service.#{cdomain}"
-        implicit_services << "s3.service.#{cdomain}"
-      end
       # Services not contained in node information
       other_services = if cdomain
-                         ['data', 'http2k', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" }
+                         ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" }
                        else
                          []
                        end
-      hosts_info[manager_registration_ip]['services'] = implicit_services + other_services
+      hosts_info[manager_registration_ip]['services'] = other_services
       hosts_info
     end
 
