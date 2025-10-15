@@ -11,7 +11,7 @@ module RbIps
       # services
 
       # ... so we hardcode the list of services for now
-      %w[f2k kafka webui]
+      %w(f2k kafka webui)
     end
 
     def read_hosts_file
