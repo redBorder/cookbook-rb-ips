@@ -18,7 +18,7 @@ module RbIps
 
       external_databag_services.each do |bag|
         data = data_bag_item('rBglobal', "ipvirtual-external-#{bag}")
-        ip = data['ip'].presence || manager_registration_ip
+        ip = data['ip'] || manager_registration_ip
         service_name = bag.delete_prefix('ipvirtual-external-')
 
         services = (service_name == 'nginx') ? NGINX_SERVICES : [service_name]
