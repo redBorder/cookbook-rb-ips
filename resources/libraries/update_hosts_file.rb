@@ -72,10 +72,13 @@ module RbIps
     def add_manager_services_info(hosts_info, manager_registration_ip, cdomain)
       # Services not contained in node information
       implicit_services = [
-        'erchef.service',
-        "erchef.service.#{cdomain}",
-        's3.service',
-        "s3.service.#{cdomain}",
+        "erchef.#{cdomain}",
+        "s3.#{cdomain}"
+        # Service are considered external so we should not include .service
+        # 'erchef.service',
+        # "erchef.service.#{cdomain}",
+        # 's3.service',
+        # "s3.service.#{cdomain}",
       ]
 
       other_services = ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" } # On deprecation
@@ -93,8 +96,11 @@ module RbIps
           target_ip = ip && is_mode_manager ? ip : manager_registration_ip
           hosts_info[target_ip] ||= {}
           hosts_info[target_ip]['services'] ||= []
-          hosts_info[target_ip]['services'] << "#{service}.service"
-          hosts_info[target_ip]['services'] << "#{service}.service.#{cdomain}"
+          # hosts_info[target_ip]['services'] << service
+          hosts_info[target_ip]['services'] << "#{service}.#{cdomain}"
+          # Service are considered external so we should not include .service
+          # hosts_info[target_ip]['services'] << "#{service}.service" 
+          # hosts_info[target_ip]['services'] << "#{service}.service.#{cdomain}"
         end
       end
       hosts_info
