@@ -1,6 +1,16 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.4.0
+
+  - Miguel Negrón
+    - [b4c63ae] Merge pull request #78 from redBorder/feature/#17729_add_file_s3_and_file_extra_data_changes
+  - manegron
+    - [b4c63ae] Merge pull request #78 from redBorder/feature/#17729_add_file_s3_and_file_extra_data_changes
+    - [bac2ca9] Add cdomain
+    - [43ef2c6] Update configure.rb
+    - [908a196] Add malware-bucket
+
 ## 2.3.3
 
   - jnavarrorb
