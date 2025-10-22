@@ -69,19 +69,22 @@ module RbIps
       hosts_info
     end
 
+    # Services not contained in node information
+    # Chef needs to know these services to resolve them properly on the first chef run.
     def add_manager_services_info(hosts_info, manager_registration_ip, cdomain)
-      # Services not contained in node information
       implicit_services = [
         "erchef.#{cdomain}",
-        "s3.#{cdomain}"
-        # Service are considered external so we should not include .service
-        # 'erchef.service',
-        # "erchef.service.#{cdomain}",
-        # 's3.service',
-        # "s3.service.#{cdomain}",
+        "s3.#{cdomain}",
+        # Following domains are considered external so we should not include .service...
+        # ... But some services might be pointing to these wrong domains. Need to investigate.
+        'erchef.service',
+        "erchef.service.#{cdomain}",
+        's3.service',
+        "s3.service.#{cdomain}"
+        ###
       ]
 
-      other_services = ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" } # On deprecation
+      other_services = ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" } # On deprecation.
       hosts_info[manager_registration_ip]['services'] = implicit_services + other_services
       hosts_info
     end
@@ -96,11 +99,13 @@ module RbIps
           target_ip = ip && is_mode_manager ? ip : manager_registration_ip
           hosts_info[target_ip] ||= {}
           hosts_info[target_ip]['services'] ||= []
-          # hosts_info[target_ip]['services'] << service
           hosts_info[target_ip]['services'] << "#{service}.#{cdomain}"
-          # Service are considered external so we should not include .service
-          # hosts_info[target_ip]['services'] << "#{service}.service" 
-          # hosts_info[target_ip]['services'] << "#{service}.service.#{cdomain}"
+          # Following services are considered external so we should not include .service
+          # ... But some services might be pointing to these wrong domains. Need to investigate.
+          hosts_info[target_ip]['services'] << service
+          hosts_info[target_ip]['services'] << "#{service}.service" 
+          hosts_info[target_ip]['services'] << "#{service}.service.#{cdomain}"
+          ###
         end
       end
       hosts_info
