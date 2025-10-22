@@ -80,7 +80,7 @@ module RbIps
         'erchef.service',
         "erchef.service.#{cdomain}",
         's3.service',
-        "s3.service.#{cdomain}"
+        "s3.service.#{cdomain}",
         ###
       ]
 
