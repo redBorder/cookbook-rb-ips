@@ -34,17 +34,18 @@ module RbIps
       grouped_virtual_ips
     end
 
-    def read_hosts_file
-      hosts_hash = Hash.new { |hash, key| hash[key] = [] }
-      File.readlines('/etc/hosts').each do |line|
-        next if line.strip.empty? || line.start_with?('#')
-        values = line.split(/\s+/)
-        ip = values.shift
-        services = values
-        hosts_hash[ip].concat(services).uniq!
-      end
-      hosts_hash
-    end
+    # def read_hosts_file
+    #   hosts_hash = Hash.new { |hash, key| hash[key] = [] }
+    #   File.readlines('/etc/hosts').each do |line|
+    #     next if line.strip.empty? || line.start_with?('#')
+
+    #     values = line.split(/\s+/)
+    #     ip = values.shift
+    #     services = values
+    #     hosts_hash[ip].concat(services).uniq!
+    #   end
+    #   hosts_hash
+    # end
 
     def manager_node_names
       query = Chef::Search::Query.new
