@@ -75,8 +75,6 @@ module RbIps
       implicit_services = [
         "erchef.#{cdomain}",
         "s3.#{cdomain}",
-        # Following domains are considered external so we should not include .service...
-        # ... But some services might be pointing to these wrong domains. Need to investigate.
         'erchef.service',
         "erchef.service.#{cdomain}",
         's3.service',

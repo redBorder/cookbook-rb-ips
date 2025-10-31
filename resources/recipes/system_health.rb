@@ -15,11 +15,6 @@ end
 # Is replaying with manager.domain and
 # The ips need to be able to resolv this
 
-# This check can be deprecated since we started to control /etc/hosts with
-# Chef, hosts.erb template and update_hosts_file.rb library
-# Activate if you need to check something different rather than
-# /etc/hosts
-
 ruby_block 'update_hosts_file_if_needed' do
   block do
     extend RbIps::Helpers

@@ -15,8 +15,6 @@ LOCAL_IP = '127.0.0.1'
 v4_local_names = %w[ localhost localhost.localdomain localhost4 localhost4.localdomain4 ]
 services = @hosts_entries.dig(LOCAL_IP,'services') || []
 v4_local_names |= services
-# v4_local_names |= %w[ Add here your local hostnames ]
-# v4_local_names = %w[ Override here your local hostnames ]
 v4_localhost = { LOCAL_IP => v4_local_names }
 
 # By default, IPv6 is enabled in Rocky network interfaces
@@ -26,14 +24,8 @@ v6_localhost = { '::1' => v6_local_names }
 @hosts_entries.delete(LOCAL_IP) # Delete localhost to not enter in remote_hosts
 remote_hosts = @hosts_entries.transform_values do |names|
   cdomain = [names['cdomain']] || []
-  # nodes |= %w[ Add here extra cdomains ] if ip == 
-  # nodes = %w[ Override here extra cdomains ] if ip == 
   nodes = names['node_names'] || []
-  # nodes |= %w[ Add here your nodes ] if ip == 
-  # nodes = %w[ Override here your nodes ] if ip == 
   services = names['services'] || []
-  # services |= %w[ Add here your services ] if ip == 
-  # services = %w[ Override here your services ] if ip == 
   cdomain + nodes + services
 end
 -%>
