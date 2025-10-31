@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.4.1
+
+  - ljblancoredborder
+    - [6f0613d] make template /etc/hosts 
+
 ## 2.4.0
 
   - Miguel Negrón
