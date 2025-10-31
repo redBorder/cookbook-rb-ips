@@ -102,7 +102,6 @@ module RbIps
           hosts_info[target_ip]['services'] << "#{service}.#{cdomain}"
           # Following services are considered external so we should not include .service
           # ... But some services might be pointing to these wrong domains. Need to investigate.
-          hosts_info[target_ip]['services'] << service
           hosts_info[target_ip]['services'] << "#{service}.service"
           hosts_info[target_ip]['services'] << "#{service}.service.#{cdomain}"
           ###
