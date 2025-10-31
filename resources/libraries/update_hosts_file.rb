@@ -2,6 +2,7 @@ module RbIps
   module Helpers
     require 'resolv'
 
+    # Returns the list of databags IPS needs to consider, in format []
     def fetch_vip_databags
       databags = []
       begin
@@ -15,6 +16,8 @@ module RbIps
       databags
     end
 
+    # Returns a map of <virtual_ip => services[]> with the external vips
+    # By default ip is not virtual, is just the manager_registration ip
     def grouped_virtual_ips(manager_registration_ip)
       ip_services = Hash.new { |ip, services| ip[services] = [] }
 
@@ -46,7 +49,7 @@ module RbIps
     #   hosts_hash
     # end
 
-    def manager_node_names
+    def fetch_node_names
       nodes = []
       Chef::Search::Query.new.search(:node, 'is_manager:true') do |node|
         nodes << "#{node.name}.node"
@@ -54,6 +57,7 @@ module RbIps
       nodes
     end
 
+    # Adds to input map services running in the IPS
     def add_localhost_info(hosts_info)
       hosts_info['127.0.0.1'] = {}
 
@@ -65,18 +69,20 @@ module RbIps
       hosts_info
     end
 
+    # Adds to input map nodes in consideration: managers and self
     def add_manager_names_info(hosts_info, manager_registration_ip, cdomain)
       hosts_info[manager_registration_ip] = {}
       intrusion_node_name = "#{node.name}.node"
+      manager_node_names = fetch_node_names
       node_names = manager_node_names << intrusion_node_name # append
       hosts_info[manager_registration_ip]['node_names'] = node_names
       hosts_info[manager_registration_ip]['cdomain'] = cdomain
       hosts_info
     end
 
-    # Services not contained in node information
-    # Chef needs to know these services to resolve them properly on the first chef run.
-    # Erchef and s3 are necessary to access VIPs, so moved to implicit
+    # Adds critical services to the input hosts_info map. They are critical because
+    # chef needs to know these services to resolve them properly on the first chef run.
+    # Erchef and s3 are necessary to access VIPs.
     def add_manager_services_info(hosts_info, manager_registration_ip, cdomain)
       implicit_services = [
         "erchef.#{cdomain}",
@@ -85,7 +91,6 @@ module RbIps
         "erchef.service.#{cdomain}",
         's3.service',
         "s3.service.#{cdomain}",
-        ###
       ]
 
       other_services = ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" } # On deprecation.
@@ -95,7 +100,9 @@ module RbIps
 
     def add_virtual_ips_info(hosts_info, manager_registration_ip, cdomain)
       is_mode_manager = !node['redborder']['cloud']
-      grouped_virtual_ips(manager_registration_ip).each do |ip, services|
+      ip_services = grouped_virtual_ips(manager_registration_ip)
+
+      ip_services.each do |ip, services|
         services.each do |service|
           # Add running services to localhost
           next if ip == '127.0.0.1'
@@ -108,28 +115,31 @@ module RbIps
           # ... But some services might be pointing to these wrong domains. Need to investigate.
           hosts_info[target_ip]['services'] << "#{service}.service"
           hosts_info[target_ip]['services'] << "#{service}.service.#{cdomain}"
-          ###
         end
       end
       hosts_info
     end
 
+    # Main function where we define a logic ruby hash map to be reading by
+    # /etc/hosts template. The fucntion is subdivided based on the logic location
+    # and the nature of the domain, some are services in localhost, others node names
     def update_hosts_file
+      hosts_info = Hash.new { |_ip, _domains| }
+
       unless node.dig('redborder', 'resolve_host')
         domain_name = node.dig('redborder', 'manager_registration_ip')
-        return {} if domain_name.nil?
+        return hosts_info if domain_name.nil?
 
         resolved_ip = manager_to_ip(domain_name)
-        return {} if resolved_ip.nil?
+        return hosts_info if resolved_ip.nil?
 
         node.normal['redborder']['resolve_host'] = resolved_ip
       end
       manager_registration_ip = node.dig('redborder', 'resolve_host')
-      return {} unless manager_registration_ip
+      return hosts_info unless manager_registration_ip
 
       cdomain = node.dig('redborder', 'cdomain')
 
-      hosts_info = {}
       hosts_info = add_localhost_info(hosts_info)
       hosts_info = add_manager_names_info(hosts_info, manager_registration_ip, cdomain)
       hosts_info = add_manager_services_info(hosts_info, manager_registration_ip, cdomain)
