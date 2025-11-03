@@ -34,18 +34,6 @@ module RbIps
       ip_services
     end
 
-    # def read_hosts_file
-    #   hosts_hash = Hash.new { |hash, key| hash[key] = [] }
-    #   File.readlines('/etc/hosts').each do |line|
-    #     next if line.strip.empty? || line.start_with?('#')
-    #     values = line.split(/\s+/)
-    #     ip = values.shift
-    #     services = values
-    #     hosts_hash[ip].concat(services).uniq!
-    #   end
-    #   hosts_hash
-    # end
-
     # Gets nodes on the format of <hostname>.node of very manager in the cluster.
     # Returns the names as an array of strings
     def fetch_node_names
