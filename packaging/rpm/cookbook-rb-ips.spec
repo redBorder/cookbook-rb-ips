@@ -8,8 +8,6 @@ License: AGPL 3.0
 URL: https://github.com/redBorder/cookbook-rb-ips
 Source0: %{name}-%{version}.tar.gz
 
-Requires: bind-utils
-
 %description
 %{summary}
 
@@ -57,9 +55,6 @@ fi
 %doc
 
 %changelog
-* Fri Oct 31 2025 Luis Blanco <ljblanco@redborder.com>
-- Add bind-utils dependency since we use dig for domain resolution
-
 * Thu Oct 10 2024 Miguel Negrón <manegron@redborder.com>
 - Add pre and postun
 
