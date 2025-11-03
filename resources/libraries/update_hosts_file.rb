@@ -1,7 +1,5 @@
 module RbIps
   module Helpers
-    require 'resolv'
-
     # Returns the list of databags IPS needs to consider, in format []
     def fetch_vip_databags
       databags = []
