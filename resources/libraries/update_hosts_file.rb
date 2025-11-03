@@ -1,7 +1,8 @@
 module RbIps
   module Helpers
-    # Gets the list of databags related with external services in interest
-    # Returns the list of databags the IPS needs to consider, in format []
+    # Gets the list of databags that IPS needs to consider
+    # sfacctd is a external service in the manager not needed by the IPS
+    # Returns the list of databags as an array of strings
     def fetch_vip_databags
       databags = []
       begin
@@ -29,7 +30,7 @@ module RbIps
             [bag.delete_prefix('ipvirtual-external-')]
           end
 
-        ip_services[ip] = services
+        ip_services[ip] += services
       end
       ip_services
     end
