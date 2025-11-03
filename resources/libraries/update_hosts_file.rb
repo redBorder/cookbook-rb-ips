@@ -58,7 +58,8 @@ module RbIps
       hosts_info
     end
 
-    # Adds to input map nodes in consideration: managers and the proper IPS
+    # Adds to input map nodes in consideration: manager nodes and the proper IPS node.
+    # Also we add the general cdomain.
     # INPUT:
     #   hosts_info: Reference of the ip=>domains map on build
     #   manager_registration_ip: The ip of the manager where the IPS was registered
