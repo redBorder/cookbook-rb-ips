@@ -4,9 +4,9 @@ require 'resolv'
 
 module RbIps
   module Helpers
-    IPV4_REGEX = /\A(?:\d{1,3}\.){3}\d{1,3}\z/
-    IPV6_REGEX = /\A(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}\z/
-    DNS_REGEX  = /\A[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/
+    IPV4_REGEX = /\A(?:\d{1,3}\.){3}\d{1,3}\z/.freeze
+    IPV6_REGEX = /\A(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}\z/.freeze
+    DNS_REGEX  = /\A[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\z/.freeze
 
     # Resolves an IP string or domain name to an IP.
     # - Returns the same IP is the input is an IP
