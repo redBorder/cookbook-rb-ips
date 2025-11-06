@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.4.2
+
+  - nilsver
+    - [d9a009f] move databag ssh to rBglobal
+
 ## 2.4.1
 
   - ljblancoredborder
