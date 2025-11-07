@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.4.3
+
+  - nilsver
+    - [96f1767] revert changes
+
 ## 2.4.2
 
   - nilsver
