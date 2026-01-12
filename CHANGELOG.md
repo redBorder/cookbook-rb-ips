@@ -4,7 +4,7 @@ cookbook-rb-ips CHANGELOG
 ## 2.4.4
 
   - nilsver
-    - [ebc890a] first version
+    - [ebc890a] Find a correct way to limit access to password data bags from sensors
 
 ## 2.4.3
 
