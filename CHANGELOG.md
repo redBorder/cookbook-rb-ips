@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.4.4
+
+  - nilsver
+    - [ebc890a] first version
+
 ## 2.4.3
 
   - nilsver
