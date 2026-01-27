@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.4.5
+
+  - Miguel Negron
+    - [887cf17] We dont need to get namespace in ips (#89)
+
 ## 2.4.4
 
   - nilsver
