@@ -35,12 +35,12 @@ module RbIps
       ip_services
     end
 
-    # Gets nodes on the format of <hostname>.node of very manager in the cluster.
-    # Returns the names as an array of strings
-    def fetch_node_names
-      nodes = []
+    # Searches for all manager nodes
+    # Returns a hash of each manager's IP address to an array of its corresponding node name
+    def fetch_manager_nodes
+      nodes = Hash.new { |h, k| h[k] = [] }
       Chef::Search::Query.new.search(:node, 'is_manager:true') do |node|
-        nodes << "#{node.name}.node"
+        nodes[node['ipaddress']] << "#{node.name}.node"
       end
       nodes
     end
@@ -67,12 +67,17 @@ module RbIps
     #   cdomain: The cdomain defined on installation of the manager/cluster
     # Returns the reference of the map with the additional info
     def add_manager_names_info(hosts_info, manager_registration_ip, cdomain)
-      hosts_info[manager_registration_ip] = {}
-      ips_node_name = "#{node.name}.node"
-      manager_node_names = fetch_node_names
-      node_names = manager_node_names << ips_node_name # append
-      hosts_info[manager_registration_ip]['node_names'] = node_names
+      fetch_manager_nodes.each do |ip, names|
+        hosts_info[ip] ||= {}
+        hosts_info[ip]['node_names'] ||= []
+        hosts_info[ip]['node_names'].concat(names)
+      end
+
+      hosts_info[manager_registration_ip] ||= {}
+      hosts_info[manager_registration_ip]['node_names'] ||= []
+      hosts_info[manager_registration_ip]['node_names'] << "#{node.name}.node"
       hosts_info[manager_registration_ip]['cdomain'] = cdomain
+
       hosts_info
     end
 
