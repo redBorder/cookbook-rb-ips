@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.4.7
+
+  - manegron
+    - [e11799d] Add rescue
+
 ## 2.4.6
 
   - manegron
