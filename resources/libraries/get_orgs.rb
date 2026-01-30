@@ -4,8 +4,14 @@ module RbIps
       organizations = []
 
       Chef::Role.list.each_key do |m_key|
-        m = Chef::Role.load m_key
-        next unless m.override_attributes['redborder'] && m.override_attributes['redborder']['organization_uuid'] && m.override_attributes['redborder']['sensor_uuid'] == m.override_attributes['redborder']['organization_uuid']
+        m = nil
+        begin
+          m = Chef::Role.load m_key
+        rescue
+          Chef::Log.error("[get_orgs] Failed to load role: #{m_key}")
+        end
+
+        next unless m && m.override_attributes['redborder'] && m.override_attributes['redborder']['organization_uuid'] && m.override_attributes['redborder']['sensor_uuid'] == m.override_attributes['redborder']['organization_uuid']
 
         organizations << m
       end
