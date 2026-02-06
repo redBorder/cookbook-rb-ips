@@ -1,6 +1,31 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.4.7
+
+  - manegron
+    - [e11799d] Add rescue
+
+## 2.4.6
+
+  - manegron
+    - [33358d2] Add rescue in load role
+    - [887cf17] We dont need to get namespace in ips (#89)
+  - David Vanhoucke
+    - [d308d14] bump version
+  - Miguel Negrón
+    - [887cf17] We dont need to get namespace in ips (#89)
+
+## 2.4.5
+
+  - Miguel Negron
+    - [887cf17] We dont need to get namespace in ips (#89)
+
+## 2.4.4
+
+  - nilsver
+    - [ebc890a] Find a correct way to limit access to password data bags from sensors
+
 ## 2.4.3
 
   - nilsver

@@ -47,9 +47,6 @@ node.run_state['sensors_info'] = get_sensors_info()
 # get sensors info full info
 node.run_state['sensors_info_all'] = get_sensors_all_info()
 
-# get namespaces
-node.run_state['namespaces'] = get_namespaces
-
 # memory
 # getting total system memory less 10% reserved by system
 sysmem_total = (node['memory']['total'].to_i * 0.90).to_i
