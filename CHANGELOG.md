@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.4.8
+  - nverschaeve
+    - [5fb0465] optimize query
+    - [c288ea3] map node names to their ip
+
 ## 2.4.7
 
   - manegron
