@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.5.0
+
+  - manegron
+    - [d297050] Always update services.json
+
 ## 2.4.8
   - nverschaeve
     - [5fb0465] optimize query
