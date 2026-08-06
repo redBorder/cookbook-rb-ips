@@ -46,12 +46,22 @@ default['redborder']['rsyslog']['mode'] = 'extended'
 # IPS
 default['redborder']['ipsrules'] = {}
 
+# redborder-satellite
+
+default['redborder']['redborder-satellite']['hub_url'] = 'wss://redborder-hub.redborder.cluster/ws'
+default['redborder']['redborder-satellite']['auth_token'] = 'super-secret-agent-token'
+default['redborder']['redborder-satellite']['private_key_path'] = '/etc/redborder-satellite/redborder-satellite.key'
+default['redborder']['redborder-satellite']['agent_id'] = node['hostname']
+default['redborder']['redborder-satellite']['insecure_skip_verify'] = true
+default['redborder']['redborder-satellite']['commands'] = {}
+
 # memory
 default['redborder']['memory_services'] = {}
 default['redborder']['memory_services']['barnyard2'] = { 'count': 10, 'memory': 0 }
 default['redborder']['memory_services']['redborder-monitor'] = { 'count': 5, 'memory': 0, 'max_limit': 20000 }
 default['redborder']['memory_services']['snmp'] = { 'count': 5, 'memory': 0, 'max_limit': 10000 }
 default['redborder']['memory_services']['snortd'] = { 'count': 10, 'memory': 0 }
+default['redborder']['memory_services']['redborder-satellite'] = { 'count': 10, 'memory': 0 }
 
 default['redborder']['services'] = {}
 default['redborder']['services']['barnyard2'] = true
@@ -63,6 +73,7 @@ default['redborder']['services']['redborder-monitor'] = true
 default['redborder']['services']['rsyslog'] = true
 default['redborder']['services']['snmp'] = true
 default['redborder']['services']['snortd'] = true
+default['redborder']['services']['redborder-satellite'] = true
 
 default['redborder']['systemdservices']['barnyard2'] = ['barnyard2']
 default['redborder']['systemdservices']['chef-client'] = ['chef-client']
@@ -73,3 +84,4 @@ default['redborder']['systemdservices']['redborder-monitor'] = ['redborder-monit
 default['redborder']['systemdservices']['rsyslog'] = ['rsyslog']
 default['redborder']['systemdservices']['snmp'] = ['snmpd']
 default['redborder']['systemdservices']['snortd'] = ['snortd']
+default['redborder']['systemdservices']['redborder-satellite'] = ['redborder-satellite']

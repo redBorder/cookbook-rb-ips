@@ -350,6 +350,20 @@ rbmonitor_config 'Configure redborder-monitor' do
   end
 end
 
+rbsat_config 'Configure redborder-satellite' do
+  if ips_services['redborder-satellite']
+    hub_url node['redborder']['redborder-satellite']['hub_url']
+    auth_token node['redborder']['redborder-satellite']['auth_token']
+    private_key_path node['redborder']['redborder-satellite']['private_key_path']
+    agent_id node['redborder']['redborder-satellite']['agent_id']
+    insecure_skip_verify node['redborder']['redborder-satellite']['insecure_skip_verify']
+    commands node['redborder']['redborder-satellite']['commands']
+    action [:add]
+  else
+    action [:remove]
+  end
+end
+
 # template "/etc/rb_snmp_pass.yml" do
 #   source "rb_snmp_pass.yml.erb"
 #   cookbook "rb-ips"

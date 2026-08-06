@@ -98,6 +98,9 @@ module RbIps
         "erchef.service.#{cdomain}",
         's3.service',
         "s3.service.#{cdomain}",
+        "redborder-hub.#{cdomain}",
+        'redborder-hub.service',
+        "redborder-hub.service.#{cdomain}",
       ]
 
       other_services = ['data', 'rbookshelf.s3'].map { |s| "#{s}.#{cdomain}" } # On deprecation.
