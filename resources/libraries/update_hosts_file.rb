@@ -99,7 +99,6 @@ module RbIps
         's3.service',
         "s3.service.#{cdomain}",
         "redborder-hub.#{cdomain}",
-        'redborder-hub.service',
         "redborder-hub.service.#{cdomain}",
       ]
 
