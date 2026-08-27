@@ -49,9 +49,9 @@ default['redborder']['ipsrules'] = {}
 # memory
 default['redborder']['memory_services'] = {}
 default['redborder']['memory_services']['barnyard2'] = { 'count': 10, 'memory': 0 }
+default['redborder']['memory_services']['redborder-exporter'] = { 'count': 10, 'memory': 0 }
 default['redborder']['memory_services']['redborder-monitor'] = { 'count': 5, 'memory': 0, 'max_limit': 20000 }
-default['redborder']['memory_services']['snmp'] = { 'count': 5, 'memory': 0, 'max_limit': 10000 }
-default['redborder']['memory_services']['snortd'] = { 'count': 10, 'memory': 0 }
+default['redborder']['memory_services']['snortd'] = { 'count': 80, 'memory': 0 }
 
 default['redborder']['services'] = {}
 default['redborder']['services']['barnyard2'] = true
