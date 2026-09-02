@@ -350,6 +350,14 @@ rbmonitor_config 'Configure redborder-monitor' do
   end
 end
 
+rbsat_config 'Configure redborder-satellite' do
+  if ips_services['redborder-satellite']
+    action [:add]
+  else
+    action [:remove]
+  end
+end
+
 # template "/etc/rb_snmp_pass.yml" do
 #   source "rb_snmp_pass.yml.erb"
 #   cookbook "rb-ips"
