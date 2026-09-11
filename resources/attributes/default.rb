@@ -52,6 +52,11 @@ default['redborder']['memory_services']['barnyard2']          = { 'count': 10, '
 default['redborder']['memory_services']['redborder-exporter'] = { 'count': 10, 'memory': 0 }
 default['redborder']['memory_services']['redborder-monitor']  = { 'count': 5, 'memory': 0 }
 default['redborder']['memory_services']['snortd']             = { 'count': 80, 'memory': 0 }
+default['redborder']['memory_services']['barnyard2'] = { 'count': 10, 'memory': 0 }
+default['redborder']['memory_services']['redborder-monitor'] = { 'count': 5, 'memory': 0, 'max_limit': 20000 }
+default['redborder']['memory_services']['snmp'] = { 'count': 5, 'memory': 0, 'max_limit': 10000 }
+default['redborder']['memory_services']['snortd'] = { 'count': 10, 'memory': 0 }
+default['redborder']['memory_services']['redborder-satellite'] = { 'count': 10, 'memory': 0 }
 # Excluded services: chef-client, chrony, rsyslog, snmpd, firewalld
 
 default['redborder']['services'] = {}
@@ -64,6 +69,7 @@ default['redborder']['services']['redborder-monitor'] = true
 default['redborder']['services']['rsyslog'] = true
 default['redborder']['services']['snmp'] = true
 default['redborder']['services']['snortd'] = true
+default['redborder']['services']['redborder-satellite'] = true
 
 default['redborder']['systemdservices']['barnyard2'] = ['barnyard2']
 default['redborder']['systemdservices']['chef-client'] = ['chef-client']
@@ -74,3 +80,4 @@ default['redborder']['systemdservices']['redborder-monitor'] = ['redborder-monit
 default['redborder']['systemdservices']['rsyslog'] = ['rsyslog']
 default['redborder']['systemdservices']['snmp'] = ['snmpd']
 default['redborder']['systemdservices']['snortd'] = ['snortd']
+default['redborder']['systemdservices']['redborder-satellite'] = ['redborder-satellite']

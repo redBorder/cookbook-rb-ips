@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.6.0
+
+  - Vimesa
+    - [8528119] Add redborder-satellite settings (#96)
+
 ## 2.5.0
 
   - manegron
