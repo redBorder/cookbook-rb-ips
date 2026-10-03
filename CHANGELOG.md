@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.6.1
+
+  - manegron
+    - [61279a5] Upload cookbook only if opscode-erchef is active
+
 ## 2.6.0
 
   - Vimesa
