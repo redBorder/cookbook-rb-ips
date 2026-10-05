@@ -1,6 +1,14 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.6.3
+
+  - Miguel Negrón
+    - [b543f78] Merge pull request #99 from redBorder/improvement/#26794_disable_clamd_by_defaul
+  - manegron
+    - [b543f78] Merge pull request #99 from redBorder/improvement/#26794_disable_clamd_by_defaul
+    - [dbdbb13] Disable clamav by default
+
 ## 2.6.2
 
   - manegron
