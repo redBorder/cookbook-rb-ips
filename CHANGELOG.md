@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.6.2
+
+  - manegron
+    - [694700a] Increase max limit mem for redborder-monitor
+
 ## 2.6.1
 
   - manegron
