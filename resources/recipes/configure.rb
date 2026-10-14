@@ -414,7 +414,7 @@ if node['redborder']['ipsrules'] && node['redborder']['cloud']
     next unless command.start_with?('/bin/env BOOTUP=none /usr/lib/redborder/bin/rb_get_sensor_rules.sh ')
 
     execute "download_rules_#{groupid}" do
-      command "/usr/lib/rvm/bin/rvm ruby-2.7.5@global do /usr/lib/redborder/scripts/rb_get_sensor_rules_cloud.rb -c '#{command}' -u #{node['redborder']['ipsrules'][groupid]['uuid'].to_s}"
+      command "/usr/lib/rvm/bin/rvm ruby-3.4.11@global do /usr/lib/redborder/scripts/rb_get_sensor_rules_cloud.rb -c '#{command}' -u #{node['redborder']['ipsrules'][groupid]['uuid'].to_s}"
       ignore_failure true
       action :run
       notifies :create, "ruby_block[update_rule_timestamp_#{groupid}]", :immediately
