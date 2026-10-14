@@ -1,6 +1,14 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 2.7.0
+
+  - Miguel Negrón
+    - [0315ba3] Merge pull request #100 from redBorder/improvement/#26867_reduce_chef_server_queries
+  - manegron
+    - [0315ba3] Merge pull request #100 from redBorder/improvement/#26867_reduce_chef_server_queries
+    - [26edebf] Reduce chef server queries
+
 ## 2.6.3
 
   - Miguel Negrón
