@@ -1,6 +1,15 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 3.0.0
+
+  - Miguel Negrón
+    - [cb959f8] Merge pull request #101 from redBorder/improvement/#26884_remove_ruby_2_7_5
+  - manegron
+    - [cb959f8] Merge pull request #101 from redBorder/improvement/#26884_remove_ruby_2_7_5
+    - [77709f9] Merge branch 'development' into improvement/#26884_remove_ruby_2_7_5
+    - [aea5dfc] Remove ruby-2.7.5
+
 ## 2.7.0
 
   - Miguel Negrón
