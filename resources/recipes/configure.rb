@@ -243,6 +243,8 @@ end
 snmp_config 'Configure snmp' do
   hostname node['hostname']
   cdomain node['redborder']['cdomain']
+  http_endpoint "https://http2k.#{node['redborder']['cdomain']}/rbdata/#{node['redborder']['sensor_uuid']}/rb_trap" if node['redborder']['cloud']
+  trap_sink node['ipaddress']
   if ips_services['snmp']
     action :add
   else
