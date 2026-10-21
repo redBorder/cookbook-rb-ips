@@ -8,6 +8,9 @@ License: AGPL 3.0
 URL: https://github.com/redBorder/cookbook-rb-ips
 Source0: %{name}-%{version}.tar.gz
 
+# rb-flow-agent has to be on the chef server before this cookbook is uploaded
+Requires: cookbook-rb-flow-agent
+
 %description
 %{summary}
 
