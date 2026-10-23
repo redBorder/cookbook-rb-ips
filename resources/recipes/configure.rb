@@ -250,8 +250,8 @@ snmp_config 'Configure snmp' do
   end
 end
 
-rb_exporter_config 'Configure rb-exporter' do
-  if ips_services['redborder-exporter']
+rb_flow_agent_config 'Configure rb-flow-agent' do
+  if ips_services['redborder-flow-agent']
     action :add
   else
     action :remove
