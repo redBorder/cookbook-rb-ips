@@ -243,6 +243,9 @@ end
 snmp_config 'Configure snmp' do
   hostname node['hostname']
   cdomain node['redborder']['cdomain']
+  sensor_uuid node['redborder']['sensor_uuid']
+  cloud node['redborder']['cloud']
+  trap_sink node['ipaddress']
   if ips_services['snmp']
     action :add
   else
