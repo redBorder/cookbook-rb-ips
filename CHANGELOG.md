@@ -1,6 +1,11 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 3.0.1
+
+  - Jose Jimenez
+    - [39714de] Add new variable for proxy mode (#103)
+
 ## 3.0.0
 
   - Miguel Negrón
