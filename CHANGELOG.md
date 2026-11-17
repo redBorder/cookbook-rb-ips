@@ -1,6 +1,13 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 3.1.0
+
+  - nilsver
+    - [d09d436] Replace rb-exporter with rb-flow-agent
+    - [b2e063f] Require cookbook-rb-flow-agent
+    - [11b2e89] remove require
+
 ## 3.0.1
 
   - Jose Jimenez
