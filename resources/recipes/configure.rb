@@ -31,8 +31,7 @@ begin
 rescue
   s3_malware_secrets = {}
 end
-# The keys are in the chef-vault item malware_vault/keys, encrypted with this sensor's client key (managers with
-# OpenBao). Not there yet (sensor registered after the managers' last Chef run): the next run picks them up.
+# not in malware_vault/keys yet: the managers add it on their next Chef run
 begin
   s3_malware_secrets = s3_malware_secrets.merge(chef_vault_item('malware_vault', 'keys').to_hash.except('id'))
 rescue StandardError
