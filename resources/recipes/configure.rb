@@ -353,7 +353,19 @@ rbmonitor_config 'Configure redborder-monitor' do
   end
 end
 
+# Registration token of the hub cluster (generated per installation by
+# rb_configure_leader.sh). It is only used to enrol the satellite key. It lives in
+# rBglobal because proxies cannot read the passwords data bag.
+hub_registration = {}
+begin
+  hub_registration = data_bag_item('rBglobal', 'hub').to_hash
+rescue
+  hub_registration = {}
+end
+
+
 rbsat_config 'Configure redborder-satellite' do
+  auth_token hub_registration['registration_token'].to_s
   if ips_services['redborder-satellite']
     action [:add]
   else
