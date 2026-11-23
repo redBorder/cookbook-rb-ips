@@ -1,6 +1,15 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 3.2.0
+
+  - Miguel Negrón
+    - [b0dcf52] Merge pull request #108 from redBorder/improvement/#157_do_not_use_a_standard_auth_token
+  - manegron
+    - [b0dcf52] Merge pull request #108 from redBorder/improvement/#157_do_not_use_a_standard_auth_token
+    - [2d02dcc] Clean empty space
+    - [1abbd23] Pass the hub registration token from the passwords data bag to rbsat_config
+
 ## 3.1.0
 
   - nilsver
