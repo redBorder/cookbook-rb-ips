@@ -363,7 +363,6 @@ rescue
   hub_registration = {}
 end
 
-
 rbsat_config 'Configure redborder-satellite' do
   auth_token hub_registration['registration_token'].to_s
   if ips_services['redborder-satellite']
