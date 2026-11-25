@@ -14,7 +14,7 @@ if File.exist?('/etc/redborder/sensor-installed.txt')
 end
 
 # Configure and enable chef-client
-dnf_package 'redborder-chef-client' do
+dnf_package 'redborder-cinc-client' do
   action :upgrade
 end
 
