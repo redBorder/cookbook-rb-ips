@@ -1,6 +1,14 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 4.0.0
+
+  - Miguel Negrón
+    - [ed84c8a] Merge pull request #109 from redBorder/improvement/#27292_migrate_to_cinc
+  - manegron
+    - [ed84c8a] Merge pull request #109 from redBorder/improvement/#27292_migrate_to_cinc
+    - [fe8f393] Migrate to cinc
+
 ## 3.2.0
 
   - Miguel Negrón
