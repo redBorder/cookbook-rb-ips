@@ -4,6 +4,7 @@
 # License:: Affero General Public License, Version 3
 
 include_recipe 'rb-ips::prepare_system'
+include_recipe 'rb-common::harden_secrets'
 include_recipe 'rb-ips::configure'
 include_recipe 'rb-ips::configure_cron_tasks'
 include_recipe 'rb-ips::configure_journald'

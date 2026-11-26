@@ -31,6 +31,12 @@ begin
 rescue
   s3_malware_secrets = {}
 end
+# not in malware_vault/keys yet: the managers add it on their next Chef run
+begin
+  s3_malware_secrets = s3_malware_secrets.merge(chef_vault_item('malware_vault', 'keys').to_hash.except('id'))
+rescue StandardError
+  nil
+end
 
 begin
   sensor_id = node['redborder']['sensor_id'].to_i
