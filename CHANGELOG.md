@@ -1,6 +1,23 @@
 cookbook-rb-ips CHANGELOG
 ===============
 
+## 4.0.0
+
+  - Miguel Negrón
+    - [ed84c8a] Merge pull request #109 from redBorder/improvement/#27292_migrate_to_cinc
+  - manegron
+    - [ed84c8a] Merge pull request #109 from redBorder/improvement/#27292_migrate_to_cinc
+    - [fe8f393] Migrate to cinc
+
+## 3.2.0
+
+  - Miguel Negrón
+    - [b0dcf52] Merge pull request #108 from redBorder/improvement/#157_do_not_use_a_standard_auth_token
+  - manegron
+    - [b0dcf52] Merge pull request #108 from redBorder/improvement/#157_do_not_use_a_standard_auth_token
+    - [2d02dcc] Clean empty space
+    - [1abbd23] Pass the hub registration token from the passwords data bag to rbsat_config
+
 ## 3.1.0
 
   - nilsver
